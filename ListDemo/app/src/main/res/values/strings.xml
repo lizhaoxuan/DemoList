@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">ListDemo</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_recycle_view">RecycleViewActivity</string>
+    <string name="title_activity_blue_tooth">BlueTooth</string>
+    <string name="title_activity_bwelcome">BWelcomeActivity</string>
+    <string name="title_activity_weather">WeatherActivity</string>
+    <string name="title_activity_heart">HeartActivity</string>
+    <string name="title_activity_music">MusicActivity</string>
+    <string name="title_activity_bitmap_compress">BitmapCompressActivity</string>
+    <string name="title_activity_thread_pool">ThreadPoolActivity</string>
+    <string name="title_activity_thread_show">ThreadShowActivity</string>
+    <string name="title_activity_control_thread">ControlThread</string>
+    <string name="title_activity_music_player">MusicPlayerActivity</string>
+</resources>

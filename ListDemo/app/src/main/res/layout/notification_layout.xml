@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="3dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical">
+
+    <ImageView
+        android:id="@+id/nImageView"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/recycleview_ember"
+        android:layout_alignParentLeft="true" />
+
+    <Button
+        android:id="@+id/nStartBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/nImageView"
+        android:layout_marginLeft="10dp"
+        android:text="播放" />
+
+    <Button
+        android:id="@+id/nStopBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/nStartBtn"
+        android:layout_marginLeft="5dp"
+        android:text="停止"/>
+
+
+
+</RelativeLayout>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--  用于个人信息页面的自定义控件 -->
+    <declare-styleable name="MapItem">
+        <attr name="keyText" format="string"/>
+        <attr name="valueText" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="ProgressBarItem">
+        <attr name="barName" format="string"/>
+    </declare-styleable>
+</resources>

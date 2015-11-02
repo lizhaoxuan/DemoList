@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingRight="20dp" >
+
+
+    <View
+        android:id="@+id/line_0"
+        android:layout_width="1dp"
+        android:layout_height="13dp"
+        android:layout_marginLeft="31dp"
+        android:background="#A6A6A6" />
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_below="@+id/line_0"
+        android:layout_marginLeft="18dp"
+        android:src="@drawable/recycleview_icon" />
+
+    <View
+        android:id="@+id/line_1"
+        android:layout_width="1dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/icon"
+        android:layout_marginLeft="31dp"
+        android:layout_alignBottom="@+id/relative"
+        android:background="#A6A6A6" />
+
+    <RelativeLayout
+        android:id="@+id/relative"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/icon"
+        android:layout_alignTop="@+id/icon"
+        android:layout_toRightOf="@+id/icon"
+        android:padding="10dp"
+        android:paddingBottom="10dp">
+
+        <ImageView
+            android:id="@+id/itemImage"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/recycleview_ember" />
+
+        <TextView
+            android:id="@+id/titleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/itemImage"
+            android:layout_alignTop="@+id/itemImage"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:maxEms="9"
+            android:paddingLeft="5dp"
+            android:textStyle="bold"
+            android:text="测试数据"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/explainText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/itemImage"
+            android:paddingLeft="5dp"
+            android:paddingTop="5dp"
+            android:text="这是详细描述啊大大大大大阿的道阿萨德阿萨"
+            android:textSize="12sp" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

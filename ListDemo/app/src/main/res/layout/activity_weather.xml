@@ -1,0 +1,91 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/weatherLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" 
+    android:background="@drawable/weather_duoyun">
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical"
+	    android:layout_weight="1" >
+		<LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content" >
+	        <EditText
+	            android:id="@+id/cityEdit"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+	            android:ems="10"
+	            android:hint="城市名称" >	
+	        </EditText>
+	        <Button
+	            android:id="@+id/enterBut"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+	            android:text="查询" />
+	
+	    </LinearLayout>
+
+        <com.demo.zhaoxuanli.listdemo.default_widget.MapItem
+			android:id="@+id/cityText"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+			android:layout_marginTop="10dp"
+			app:keyText="城市："
+			app:valueText="大连"/>
+		<com.demo.zhaoxuanli.listdemo.default_widget.MapItem
+			android:id="@+id/timeText"
+			android:layout_width="match_parent"
+			android:layout_height="35dp"
+			android:layout_marginTop="10dp"
+			app:keyText="时间："
+			app:valueText="19:00"/>
+		<com.demo.zhaoxuanli.listdemo.default_widget.MapItem
+			android:id="@+id/weatherText"
+			android:layout_width="match_parent"
+			android:layout_height="35dp"
+			android:layout_marginTop="10dp"
+			app:keyText="天气："
+			app:valueText="晴"/>
+		<com.demo.zhaoxuanli.listdemo.default_widget.MapItem
+			android:id="@+id/tempText"
+			android:layout_width="match_parent"
+			android:layout_height="35dp"
+			android:layout_marginTop="10dp"
+			app:keyText="实时温度："
+			app:valueText="25℃"/>
+		<com.demo.zhaoxuanli.listdemo.default_widget.MapItem
+			android:id="@+id/day_tempText"
+			android:layout_width="match_parent"
+			android:layout_height="35dp"
+			android:layout_marginTop="10dp"
+			app:keyText="平均气温："
+			app:valueText="20℃"/>
+		<com.demo.zhaoxuanli.listdemo.default_widget.MapItem
+			android:id="@+id/WDText"
+			android:layout_width="match_parent"
+			android:layout_height="35dp"
+			android:layout_marginTop="10dp"
+			app:keyText="风力|风向："
+			app:valueText="东风|4级"/>
+
+		<com.demo.zhaoxuanli.listdemo.default_widget.MapItem
+			android:id="@+id/SDText"
+			android:layout_width="match_parent"
+			android:layout_height="35dp"
+			android:layout_marginTop="10dp"
+			app:keyText="湿度："
+			app:valueText="43%"/>
+
+	</LinearLayout>
+	
+	<Button
+	    android:id="@+id/refreshBut"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:text="更新" />
+</LinearLayout>
