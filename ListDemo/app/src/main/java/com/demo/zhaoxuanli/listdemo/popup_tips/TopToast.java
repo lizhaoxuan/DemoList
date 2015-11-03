@@ -25,7 +25,7 @@ public class TopToast implements Cloneable {
     public static int StateHeight = 0;  //状态栏高度
     private int menuWidth =0;     //自动计算
     private int menuHeight = 100;  //默认
-    private int displayTime = 1000;  //可设置
+    private int displayTime = 1800;  //可设置
     private Activity activity;
     private View popupWindow_view;
     private PopupWindow popupWindow;
