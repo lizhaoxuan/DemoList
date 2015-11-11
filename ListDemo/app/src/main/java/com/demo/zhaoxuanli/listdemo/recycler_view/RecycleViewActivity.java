@@ -1,6 +1,7 @@
 package com.demo.zhaoxuanli.listdemo.recycler_view;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -15,6 +16,7 @@ import android.view.View;
 
 import com.demo.zhaoxuanli.listdemo.R;
 import com.demo.zhaoxuanli.listdemo.bluetooth.BlueToothActivity;
+import com.demo.zhaoxuanli.listdemo.db_orm.SQLiteActivity;
 import com.demo.zhaoxuanli.listdemo.gyroscope.HeartActivity;
 import com.demo.zhaoxuanli.listdemo.draw_music.MusicActivity;
 import com.demo.zhaoxuanli.listdemo.music_player.MusicPlayerActivity;
@@ -96,8 +98,8 @@ public class RecycleViewActivity extends AppCompatActivity {
                 "演示不同类型线程池效果", ThreadPoolActivity.class));
         myDatas.add(new ItemValue(5,"音乐播放器",
                 "通过Service播放音乐，同时自定义通知栏消息，可对音乐进行控制", MusicPlayerActivity.class));
-        myDatas.add(new ItemValue(6,"蓝牙",
-                "打开蓝牙连接，进行搜索，即可选取蓝牙进行连接", BlueToothActivity.class));
+        myDatas.add(new ItemValue(6,"自定义orm数据库框架操作",
+                "打开蓝牙连接，进行搜索，即可选取蓝牙进行连接", SQLiteActivity.class));
         myDatas.add(new ItemValue(6,"蓝牙",
                 "打开蓝牙连接，进行搜索，即可选取蓝牙进行连接", BlueToothActivity.class));
         myDatas.add(new ItemValue(6,"蓝牙",

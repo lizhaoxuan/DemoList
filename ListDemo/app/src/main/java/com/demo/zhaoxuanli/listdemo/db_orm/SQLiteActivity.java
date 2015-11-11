@@ -1,10 +1,11 @@
 package com.demo.zhaoxuanli.listdemo.db_orm;
 
-import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.demo.zhaoxuanli.listdemo.R;
+import com.demo.zhaoxuanli.listdemo.db_orm.orm.DataSupport;
 import com.demo.zhaoxuanli.listdemo.db_orm.orm.DatabaseHelper;
 
 import java.util.Random;
@@ -31,7 +33,7 @@ public class SQLiteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sqlite);
-        initDataSource();
+        //initDataSource();
         initView();
 
     }
@@ -63,7 +65,8 @@ public class SQLiteActivity extends AppCompatActivity {
         mSaveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int id = random.nextInt();
+                int id = random.nextInt()*-1;
+                System.out.println(id);
                 String name = "小明"+random.nextInt();
                 String sex ;
                 if(random.nextInt()%2==0)
@@ -75,12 +78,11 @@ public class SQLiteActivity extends AppCompatActivity {
 
                 StudentValue sv = new StudentValue(id,name,sex,className,schoolName);
 
+                DataSupport dataSupport = DataSupport.getInstance(getApplication());
+                dataSupport.insertEntity(sv);
+                StudentValue studentValue = (StudentValue)dataSupport.getEntity(id,StudentValue.class);
+                Log.e("SQLiteActivity",studentValue.getName());
 
-
-                ContentValues cv = new ContentValues();//实例化一个ContentValues用来装载待插入的数据
-                cv.put("username","Jack Johnson");//添加用户名
-                cv.put("password","iLovePopMusic"); //添加密码
-                db.insert("user",null,cv);//执行插入操作
             }
         });
 
