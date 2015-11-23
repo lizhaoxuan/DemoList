@@ -55,8 +55,8 @@ public class ReflectionTool {
         Object obj = null;
 
         try {
-            Constructor ct = classT.getConstructor(null);
-            obj = ct.newInstance(null);
+            Constructor ct = classT.getConstructor();
+            obj = ct.newInstance();
         } catch (Exception e) {
             e.printStackTrace();
         }
