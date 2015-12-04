@@ -81,6 +81,9 @@
             android:label="@string/title_activity_sqlite"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
+        <activity android:name=".embed.EmbedActivity"
+            android:theme="@style/EmbedActivity">
+        </activity>
     </application>
 
 </manifest>

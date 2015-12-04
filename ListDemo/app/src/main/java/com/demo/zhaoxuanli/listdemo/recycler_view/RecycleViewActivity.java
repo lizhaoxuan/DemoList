@@ -17,6 +17,7 @@ import com.demo.zhaoxuanli.listdemo.bluetooth.BlueToothActivity;
 import com.demo.zhaoxuanli.listdemo.db_orm.SQLiteActivity;
 import com.demo.zhaoxuanli.listdemo.draw_music.MusicActivity;
 import com.demo.zhaoxuanli.listdemo.gyroscope.HeartActivity;
+import com.demo.zhaoxuanli.listdemo.embed.EmbedActivity;
 import com.demo.zhaoxuanli.listdemo.music_player.MusicPlayerActivity;
 import com.demo.zhaoxuanli.listdemo.popup_tips.NoDataTip;
 import com.demo.zhaoxuanli.listdemo.popup_tips.PopupTips;
@@ -114,44 +115,10 @@ public class RecycleViewActivity extends AppCompatActivity {
                 "打开蓝牙连接，进行搜索，即可选取蓝牙进行连接", SQLiteActivity.class));
         myDatas.add(new ItemValue(6, "蓝牙",
                 "打开蓝牙连接，进行搜索，即可选取蓝牙进行连接", BlueToothActivity.class));
-        myDatas.add(new ItemValue(6, "蓝牙",
-                "打开蓝牙连接，进行搜索，即可选取蓝牙进行连接", BlueToothActivity.class));
+        myDatas.add(new ItemValue(6, "动态控件封装",
+                "封装NoDataTips,TopTips,Loading,ToolBar", EmbedActivity.class));
 
-        myDatas.add(new ItemValue(0, "天气查询",
-                "通过HTTP访问中央气象台，根据官方API进行解析，同时根据天气状况，切换背景图片",
-                WeatherActivity.class));
-        myDatas.add(new ItemValue(1, "音乐波形图",
-                "读取系统音乐，并根据音量高低显示波形图", MusicActivity.class));
-        myDatas.add(new ItemValue(2, "陀螺仪",
-                "调用android陀螺仪传感器，晃动手机，改变图形形状", HeartActivity.class));
-        myDatas.add(new ItemValue(3, "线程池Demo",
-                "演示不同类型线程池效果", ThreadPoolActivity.class));
-        myDatas.add(new ItemValue(5, "音乐播放器",
-                "通过Service播放音乐，同时自定义通知栏消息，可对音乐进行控制", MusicPlayerActivity.class));
-        myDatas.add(new ItemValue(6, "自定义orm数据库框架操作",
-                "打开蓝牙连接，进行搜索，即可选取蓝牙进行连接", SQLiteActivity.class));
-        myDatas.add(new ItemValue(6, "蓝牙",
-                "打开蓝牙连接，进行搜索，即可选取蓝牙进行连接", BlueToothActivity.class));
-        myDatas.add(new ItemValue(6, "蓝牙",
-                "打开蓝牙连接，进行搜索，即可选取蓝牙进行连接", BlueToothActivity.class));
 
-        myDatas.add(new ItemValue(0, "天气查询",
-                "通过HTTP访问中央气象台，根据官方API进行解析，同时根据天气状况，切换背景图片",
-                WeatherActivity.class));
-        myDatas.add(new ItemValue(1, "音乐波形图",
-                "读取系统音乐，并根据音量高低显示波形图", MusicActivity.class));
-        myDatas.add(new ItemValue(2, "陀螺仪",
-                "调用android陀螺仪传感器，晃动手机，改变图形形状", HeartActivity.class));
-        myDatas.add(new ItemValue(3, "线程池Demo",
-                "演示不同类型线程池效果", ThreadPoolActivity.class));
-        myDatas.add(new ItemValue(5, "音乐播放器",
-                "通过Service播放音乐，同时自定义通知栏消息，可对音乐进行控制", MusicPlayerActivity.class));
-        myDatas.add(new ItemValue(6, "自定义orm数据库框架操作",
-                "打开蓝牙连接，进行搜索，即可选取蓝牙进行连接", SQLiteActivity.class));
-        myDatas.add(new ItemValue(6, "蓝牙",
-                "打开蓝牙连接，进行搜索，即可选取蓝牙进行连接", BlueToothActivity.class));
-        myDatas.add(new ItemValue(6, "蓝牙",
-                "打开蓝牙连接，进行搜索，即可选取蓝牙进行连接", BlueToothActivity.class));
     }
 
 
