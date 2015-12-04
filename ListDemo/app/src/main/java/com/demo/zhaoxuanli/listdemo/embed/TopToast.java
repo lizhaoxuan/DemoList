@@ -32,7 +32,7 @@ public class TopToast extends RelativeLayout {
 
     private void init(Context context, AttributeSet attrs) {
         LayoutInflater.from(context).inflate(R.layout.widget_top_toast, this, true);
-        textView = (TextView) findViewById(R.id.textView);
+        textView = (TextView) findViewById(R.id.tipsText);
 
         if (attrs == null) {
             return;

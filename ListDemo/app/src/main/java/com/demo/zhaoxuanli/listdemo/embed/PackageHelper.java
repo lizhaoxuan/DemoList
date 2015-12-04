@@ -103,8 +103,10 @@ public class PackageHelper {
         contentView.addView(contentLinearLayout);
 
         //添加TopTips
-        ViewGroup.LayoutParams topTipsParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 50);
+        LinearLayout.LayoutParams topTipsParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 50);
+        topTipsParams.topMargin = -50;
         contentLinearLayout.addView(topTipsLayout,topTipsParams);
+        //topTipsLayout.setVisibility(View.GONE);
 
     }
 
@@ -152,11 +154,15 @@ public class PackageHelper {
         return toolBar;
     }
 
-    public ViewGroup getTopTipsLayout() {
+    public ViewGroup getTopTipsView() {
         return topTipsLayout;
     }
 
-    public ViewGroup getNoDataTipsLayout() {
+    public ViewGroup getNoDataTipsView() {
         return noDataTipsLayout;
+    }
+
+    public View getUserView() {
+        return userView;
     }
 }

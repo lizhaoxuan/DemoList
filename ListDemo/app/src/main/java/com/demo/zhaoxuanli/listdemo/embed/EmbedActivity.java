@@ -44,6 +44,8 @@ public class EmbedActivity extends BaseActivity {
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                TopToast topToast = (TopToast)packageHelper.getTopTipsView();
+//                topToast.setText("修改过的Tips提示");
                 showNoDataTips();
             }
         });
