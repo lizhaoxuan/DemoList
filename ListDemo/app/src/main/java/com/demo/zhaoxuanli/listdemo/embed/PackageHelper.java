@@ -1,5 +1,7 @@
 package com.demo.zhaoxuanli.listdemo.embed;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.v7.widget.Toolbar;
@@ -12,6 +14,25 @@ import android.widget.LinearLayout;
 import com.demo.zhaoxuanli.listdemo.R;
 
 /**
+ * 层次结构
+ * FrameLayout（rootView）{   //根布局
+ *      ToolBar
+ *      LinearLayout(rootView){   //内容布局
+ *          TopWidget     //顶部嵌入式通知消息
+ *          UserView    //真正用户布局内容
+ *          BottomWidget   //底部嵌入View
+ *
+ *      }
+ *      NoDataTips(match,match,gone)   //空数据提示控件
+ *      ErrorTips(match,match,gone)    //错误提示控件
+ *      ...
+ *      Loading(match,match,gone)      //loading
+ * }
+ *
+ * Tips:
+ * 纯静态页面可直接传入布局id，其他建议嵌入控件采用自定义组件
+ * 接收参数 int or View
+ * NoDataTip,ErrorTip建议使用一个自定义组件集成
  * Created by lizhaoxuan on 15/12/4.
  */
 public class PackageHelper {
@@ -19,25 +40,27 @@ public class PackageHelper {
     /*上下文，创建view的时候需要用到*/
     private Context context;
 
-    /*base view*/
-    private FrameLayout contentView;
+    /*root view*/
+    private FrameLayout rootView;
 
-    /*base LinearLayout*/
-    private LinearLayout contentLinearLayout;
+    /*content LinearLayout*/
+    private LinearLayout contentLayout;
 
     /*用户定义的view*/
     private View userView;
 
     /*toolbar*/
-    private Toolbar toolBar;
+    private Toolbar toolbar;
 
-    /*视图构造器*/
-    private LayoutInflater inflater;
+    /*顶部控件*/
+    private View topWidget;
 
-    /*集成控件*/
-    private ViewGroup topTipsLayout;
+    /*覆盖式控件列表*/
+    private View [] coverWidgetArray;
 
-    private ViewGroup noDataTipsLayout;
+    /*底部控件列表*/
+    private View [] bottomWidgetArray;
+
 
     /*
     * 两个属性
@@ -49,120 +72,244 @@ public class PackageHelper {
             R.attr.actionBarSize
     };
 
-    public PackageHelper(Context context, int layoutId) {
+    private PackageHelper(Context context ,View userView,Toolbar toolbar,View topWidget,
+                         View [] bottomWidgetArray,View [] coverWidgetArray) {
         this.context = context;
-        inflater = LayoutInflater.from(this.context);
-        /*初始化整个内容*/
-        initContentView();
-        /*初始化各个预定组件，用户可自定义修改*/
-        initWidget();
+        this.userView = userView;
+        this.toolbar = toolbar;
+        this.topWidget = topWidget;
+        this.bottomWidgetArray = bottomWidgetArray;
+        this.coverWidgetArray = coverWidgetArray;
 
-        /*添加线性布局 目的：添加TopToast*/
-        initLinearLayout();
+        //初始化根布局
+        initRootView();
 
-        /*初始化用户定义的布局*/
-        initUserView(layoutId);
-        /*添加空数据提示控件*/
-        addNoDataTips();
-        /*初始化toolbar*/
-        initToolBar();
+        //添加内容布局
+        initContentLayout();
 
-
+        addTopWidget();
+        addUserView();
+        addBottomWidget();
+        addCoverWidget();
     }
 
-    private void initContentView() {
-        /*直接创建一个帧布局，作为视图容器的父容器*/
-        contentView = new FrameLayout(context);
+    private void initRootView() {
+        //直接创建一个帧布局，作为视图容器的父容器
+        rootView = new FrameLayout(context);
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);
-        contentView.setLayoutParams(params);
-
+        rootView.setLayoutParams(params);
     }
 
-    private void initWidget(){
-        this.topTipsLayout = new TopToast(context);
-        this.noDataTipsLayout = new NoDataTips(context);
-    }
-
-    private void initLinearLayout(){
-        contentLinearLayout = new LinearLayout(context);
+    private void initContentLayout() {
+        contentLayout = new LinearLayout(context);
 
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        TypedArray typedArray = context.getTheme().obtainStyledAttributes(ATTRS);
-        /*获取主题中定义的悬浮标志*/
-        boolean overly = typedArray.getBoolean(0, false);
-        /*获取主题中定义的toolbar的高度*/
-        int toolBarSize = (int) typedArray.getDimension(1,(int) context.getResources().getDimension(R.dimen.abc_action_bar_default_height_material));
-        typedArray.recycle();
-        /*如果是悬浮状态，则不需要设置间距*/
-        params.topMargin = toolBarSize;
 
-        contentLinearLayout.setLayoutParams(params);
-        contentLinearLayout.setOrientation(LinearLayout.VERTICAL);
+        if(toolbar != null){
+            TypedArray typedArray = context.getTheme().obtainStyledAttributes(ATTRS);
+            //获取主题中定义的悬浮标志
+            boolean overly = typedArray.getBoolean(0, false);
+            //获取主题中定义的toolbar的高度
+            int toolBarSize = (int) typedArray.getDimension(1, (int) context.getResources().getDimension(R.dimen.abc_action_bar_default_height_material));
+            typedArray.recycle();
+            //如果是悬浮状态，则不需要设置间距
+            params.topMargin = overly ? 0 : toolBarSize;
+        }
 
-        contentView.addView(contentLinearLayout);
+        contentLayout.setLayoutParams(params);
+        contentLayout.setOrientation(LinearLayout.VERTICAL);
 
-        //添加TopTips
-        LinearLayout.LayoutParams topTipsParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 50);
-        topTipsParams.topMargin = -50;
-        contentLinearLayout.addView(topTipsLayout,topTipsParams);
-        //topTipsLayout.setVisibility(View.GONE);
-
+        rootView.addView(contentLayout);
     }
 
-    private void addNoDataTips(){
-        ViewGroup.LayoutParams topTipsParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        noDataTipsLayout.setVisibility(View.GONE);
-        contentView.addView(noDataTipsLayout);
+
+    private void addTopWidget(){
+        if(topWidget != null){
+            LinearLayout.LayoutParams topTipsParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) context.getResources().getDimension(R.dimen.abc_action_bar_default_height_material));
+            topTipsParams.topMargin = - (int) context.getResources().getDimension(R.dimen.abc_action_bar_default_height_material);
+            contentLayout.addView(topWidget, topTipsParams);
+        }
     }
 
-    private void initUserView(int id) {
-        userView = inflater.inflate(id, null);
+    private void addUserView() {
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        TypedArray typedArray = context.getTheme().obtainStyledAttributes(ATTRS);
-        /*获取主题中定义的悬浮标志*/
-        boolean overly = typedArray.getBoolean(0, false);
-        /*获取主题中定义的toolbar的高度*/
-        int toolBarSize = (int) typedArray.getDimension(1,(int) context.getResources().getDimension(R.dimen.abc_action_bar_default_height_material));
-        typedArray.recycle();
-        /*如果是悬浮状态，则不需要设置间距*/
-//        params.topMargin = overly ? 0 : toolBarSize;
-        params.topMargin = toolBarSize;
-        contentLinearLayout.addView(userView, params);
-
+        contentLayout.addView(userView, params);
     }
 
-    private void initToolBar() {
-        /*通过inflater获取toolbar的布局文件*/
-        View toolbar = inflater.inflate(R.layout.widget_toolbar, contentView);
-        toolBar = (Toolbar) toolbar.findViewById(R.id.id_tool_bar);
+    private void addBottomWidget(){
+        if(bottomWidgetArray != null){
+            for (View view : bottomWidgetArray){
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                contentLayout.addView(view, params);
+                view.setVisibility(View.GONE);
+            }
+        }
     }
 
-    public void setTopTipsLayout(ViewGroup toptips){
-        this.topTipsLayout = toptips;
+    private void addCoverWidget(){
+        if(coverWidgetArray != null){
+            for (View view : coverWidgetArray){
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                rootView.addView(view, params);
+                view.setVisibility(View.GONE);
+            }
+        }
     }
 
-    public void setNoDataTipsLayout(ViewGroup noDataTipsLayout){
-        this.noDataTipsLayout = noDataTipsLayout;
-    }
 
-    public FrameLayout getContentView() {
-        return contentView;
+    /*--------------- 各View get方法 ----------------*/
+    public FrameLayout getRootView() {
+        return rootView;
     }
 
     public Toolbar getToolBar() {
-        return toolBar;
+        return toolbar;
     }
 
-    public ViewGroup getTopTipsView() {
-        return topTipsLayout;
-    }
-
-    public ViewGroup getNoDataTipsView() {
-        return noDataTipsLayout;
+    public View getTopWidget() {
+        return topWidget;
     }
 
     public View getUserView() {
         return userView;
     }
+
+    public View getViewForCoverWidget(int position){
+        try{
+            return coverWidgetArray[position];
+        }catch (ArrayIndexOutOfBoundsException e){
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+    public View [] getCoverWidgetArray(){
+        return coverWidgetArray;
+    }
+
+    public View getViewForBottomWidget(int position){
+        try{
+            return coverWidgetArray[position];
+        }catch (ArrayIndexOutOfBoundsException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public View [] getBottomWidgetArray(){
+        return bottomWidgetArray;
+    }
+
+
+    /**
+     * TopWidget的显示和隐藏
+     * 因为TopWidget并不像bottomWidget 和 coverWidget 一样只是gone和visible
+     * 考虑用户体验，TopWidget通过向上偏移实现隐藏，所以其显示隐藏交由PackageHelper负责
+     */
+    public void showTopWidget(){
+        if(topWidget == null){
+            return ;
+        }
+        int height = topWidget.getHeight();
+        ObjectAnimator anim1 = ObjectAnimator.ofFloat(topWidget,
+                "y",  -height ,  0f);
+        ObjectAnimator anim2 = ObjectAnimator.ofFloat(userView,
+                "y",  0f ,  height);
+        AnimatorSet animSet = new AnimatorSet();
+        animSet.play(anim1).with(anim2);
+        //animSet.play(anim2).with(anim1);
+        animSet.setDuration(1000);
+        animSet.start();
+
+    }
+
+    public void hideTopWidget(){
+        if(topWidget == null){
+            return ;
+        }
+        int height = topWidget.getHeight();
+        ObjectAnimator anim1 = ObjectAnimator.ofFloat(topWidget,
+                "y",  0f ,  -height);
+        ObjectAnimator anim2 = ObjectAnimator.ofFloat(userView,
+                "y",  height ,  0f);
+        AnimatorSet animSet = new AnimatorSet();
+        animSet.play(anim1).with(anim2);
+        //animSet.play(anim2).with(anim1);
+        animSet.setDuration(1000);
+        animSet.start();
+    }
+
+    public static class Builder{
+        private Context context;
+        /*视图构造器*/
+        private LayoutInflater inflater;
+        /*用户定义的view*/
+        private View userView;
+        /*toolbar*/
+        private Toolbar toolbar;
+        /*顶部控件*/
+        private View topWidget;
+        /*覆盖式控件列表*/
+        private View [] coverWidgetArray;
+        /*底部控件列表*/
+        private View [] bottomWidgetArray;
+        /*haveToolBar*/
+        private boolean haveToolBar = false;
+        public Builder(Context context,int layoutId){
+            this.context = context;
+            inflater = LayoutInflater.from(context);
+            userView = inflater.inflate(layoutId, null);
+        }
+
+        public Builder setToolbar(int layoutId,int viewId){
+            View view = inflater.inflate(layoutId,null);
+            toolbar = (Toolbar) view.findViewById(viewId);
+            return this;
+        }
+
+        public Builder setTopWidget(int layoutResID){
+            topWidget = inflater.inflate(layoutResID,null);
+            return this;
+        }
+
+        public Builder setTopWidget(View view){
+            topWidget = view;
+            return this;
+        }
+
+        public Builder setBottomWidgetArray(int [] viewIds){
+            int length = viewIds.length;
+            bottomWidgetArray = new View[length];
+            for (int i = 0; i < length ; i++) {
+                bottomWidgetArray[i] = inflater.inflate(viewIds[i],null);
+            }
+            return this;
+        }
+
+        public Builder setBottomWidgetArray(View [] views){
+            bottomWidgetArray = views;
+            return this;
+        }
+
+        public Builder setCoverWidgetArray(int [] viewIds){
+            int length = viewIds.length;
+            coverWidgetArray = new View[length];
+            for (int i = 0; i < length ; i++) {
+                coverWidgetArray[i] = inflater.inflate(viewIds[i],null);
+            }
+            return this;
+        }
+
+        public Builder setCoverWidgetArray(View [] views){
+            coverWidgetArray = views;
+            return this;
+        }
+        public PackageHelper build(){
+            return new PackageHelper(context,userView,toolbar,topWidget,
+                    bottomWidgetArray,coverWidgetArray);
+        }
+    }
+
 }

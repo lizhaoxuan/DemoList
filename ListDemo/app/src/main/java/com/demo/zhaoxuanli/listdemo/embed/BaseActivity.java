@@ -1,21 +1,14 @@
 package com.demo.zhaoxuanli.listdemo.embed;
 
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
-import android.view.animation.AnimationUtils;
-import android.view.animation.LinearInterpolator;
-import android.view.animation.TranslateAnimation;
-import android.widget.Toast;
 
 import com.demo.zhaoxuanli.listdemo.R;
 
 /**
+ *
  * Created by lizhaoxuan on 15/12/4.
  */
 public class BaseActivity extends AppCompatActivity {
@@ -26,21 +19,35 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
 
-        packageHelper = new PackageHelper(this,layoutResID) ;
+
+        //初始化Package
+        initPackageHelper(layoutResID);
+
         toolbar = packageHelper.getToolBar() ;
 
-        setContentView(packageHelper.getContentView());
+        setContentView(packageHelper.getRootView());
         /*把 toolbar 设置到Activity 中*/
         setSupportActionBar(toolbar);
         /*自定义的一些操作*/
         onCreateCustomToolBar(toolbar) ;
+    }
+
+    /**
+     * 可以通过重写该方法，改变BaseActivity创建模式
+     * @param layoutResID
+     */
+    protected void initPackageHelper(int layoutResID){
+        packageHelper = new PackageHelper.Builder(this,layoutResID)
+                //.setToolbar(R.layout.widget_toolbar,R.id.id_tool_bar)
+                .setTopWidget(new TopToast(this))
+                .setCoverWidgetArray(new View[]{new NoDataTips(this)})
+                .build();
     }
 
     public void onCreateCustomToolBar(android.support.v7.widget.Toolbar toolbar){
@@ -48,10 +55,7 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     protected void showTopTips(){
-        final View tipsView = packageHelper.getTopTipsView();
-        final View userView = packageHelper.getUserView();
-
-        int height = 50;
+        packageHelper.showTopWidget();
 
 //        Animation animation = new TranslateAnimation(0,0,0,height);
 //        animation.setDuration(500);
@@ -68,45 +72,25 @@ public class BaseActivity extends AppCompatActivity {
 
 //        animation.setFillAfter(true);
 //        useranimation.setFillAfter(true);
-        //Toast.makeText(this,(""+(tipsView.getVisibility()==View.GONE)),Toast.LENGTH_SHORT).show();
-        //useranimation.setFillBefore(false);
+//        Toast.makeText(this,(""+(tipsView.getVisibility()==View.GONE)),Toast.LENGTH_SHORT).show();
+//        useranimation.setFillBefore(false);
 //        Animation userAnimation = AnimationUtils.loadAnimation(this, R.anim.out_top_to_down_1);
 //        userView.startAnimation(userAnimation);
 //        Animation tipsAnimation = AnimationUtils.loadAnimation(this, R.anim.out_top_to_down_1);
 //        tipsView.startAnimation(tipsAnimation);
-        //tipsAnimation.setFillBefore(false);
-
-        ObjectAnimator anim1 = ObjectAnimator.ofFloat(tipsView,
-                "y",  -50f ,  0f);
-        ObjectAnimator anim2 = ObjectAnimator.ofFloat(userView,
-                "y",  0f ,  50.0f);
-        AnimatorSet animSet = new AnimatorSet();
-        animSet.play(anim1).with(anim2);
-        //animSet.play(anim2).with(anim1);
-        animSet.setDuration(1000);
-        animSet.start();
+//        tipsAnimation.setFillBefore(false);
 
     }
     protected void hideTopTips(){
-        final View tipsView = packageHelper.getTopTipsView();
-        final View userView = packageHelper.getUserView();
-        ObjectAnimator anim1 = ObjectAnimator.ofFloat(tipsView,
-                "y",  0f ,  -50f);
-        ObjectAnimator anim2 = ObjectAnimator.ofFloat(userView,
-                "y",  50f ,  0f);
-        AnimatorSet animSet = new AnimatorSet();
-        animSet.play(anim1).with(anim2);
-        //animSet.play(anim2).with(anim1);
-        animSet.setDuration(1000);
-        animSet.start();
+        packageHelper.hideTopWidget();
     }
 
     protected void showNoDataTips(){
-        packageHelper.getNoDataTipsView().setVisibility(View.VISIBLE);
+        packageHelper.getViewForCoverWidget(0).setVisibility(View.VISIBLE);
     }
 
     protected void hideNoDataTips(){
-        packageHelper.getNoDataTipsView().setVisibility(View.GONE);
+        packageHelper.getViewForCoverWidget(0).setVisibility(View.GONE);
     }
 
 
