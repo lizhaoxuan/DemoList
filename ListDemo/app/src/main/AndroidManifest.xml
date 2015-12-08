@@ -81,7 +81,7 @@
             android:label="@string/title_activity_sqlite"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
-        <activity android:name=".embed.EmbedActivity"
+        <activity android:name=".custom_widget.embedded.EmbedActivity"
             android:theme="@style/EmbedActivity">
         </activity>
     </application>

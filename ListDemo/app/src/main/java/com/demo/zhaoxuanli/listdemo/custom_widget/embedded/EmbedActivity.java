@@ -1,4 +1,4 @@
-package com.demo.zhaoxuanli.listdemo.embed;
+package com.demo.zhaoxuanli.listdemo.custom_widget.embedded;
 
 import android.os.Bundle;
 import android.view.View;

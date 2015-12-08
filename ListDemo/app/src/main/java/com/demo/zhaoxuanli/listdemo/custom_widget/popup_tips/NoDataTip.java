@@ -1,4 +1,4 @@
-package com.demo.zhaoxuanli.listdemo.popup_tips;
+package com.demo.zhaoxuanli.listdemo.custom_widget.popup_tips;
 
 import android.app.Activity;
 import android.graphics.Rect;

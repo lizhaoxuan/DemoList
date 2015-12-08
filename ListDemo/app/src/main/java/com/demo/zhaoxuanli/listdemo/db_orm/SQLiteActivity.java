@@ -65,7 +65,7 @@ public class SQLiteActivity extends AppCompatActivity {
         mSaveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int id = random.nextInt()*-1;
+                int id = random.nextInt();
                 System.out.println(id);
                 String name = "小明"+random.nextInt();
                 String sex ;

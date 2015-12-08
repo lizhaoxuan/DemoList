@@ -1,11 +1,9 @@
-package com.demo.zhaoxuanli.listdemo.embed;
+package com.demo.zhaoxuanli.listdemo.custom_widget.embedded;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-
-import com.demo.zhaoxuanli.listdemo.R;
 
 /**
  *

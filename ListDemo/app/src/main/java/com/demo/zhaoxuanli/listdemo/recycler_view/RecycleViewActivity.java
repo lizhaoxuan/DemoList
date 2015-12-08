@@ -17,10 +17,9 @@ import com.demo.zhaoxuanli.listdemo.bluetooth.BlueToothActivity;
 import com.demo.zhaoxuanli.listdemo.db_orm.SQLiteActivity;
 import com.demo.zhaoxuanli.listdemo.draw_music.MusicActivity;
 import com.demo.zhaoxuanli.listdemo.gyroscope.HeartActivity;
-import com.demo.zhaoxuanli.listdemo.embed.EmbedActivity;
+import com.demo.zhaoxuanli.listdemo.custom_widget.embedded.EmbedActivity;
 import com.demo.zhaoxuanli.listdemo.music_player.MusicPlayerActivity;
-import com.demo.zhaoxuanli.listdemo.popup_tips.NoDataTip;
-import com.demo.zhaoxuanli.listdemo.popup_tips.PopupTips;
+import com.demo.zhaoxuanli.listdemo.custom_widget.popup_tips.NoDataTip;
 import com.demo.zhaoxuanli.listdemo.thread_pool.ThreadPoolActivity;
 import com.demo.zhaoxuanli.listdemo.weather.WeatherActivity;
 
