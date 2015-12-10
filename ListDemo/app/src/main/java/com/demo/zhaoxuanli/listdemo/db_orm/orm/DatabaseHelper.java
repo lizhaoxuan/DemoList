@@ -20,7 +20,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = "create table StudentValue(id INTEGER not null , name varchar(60),sex varchar(10),className varchar(50),schoolName varchar(50));";
+        String sql = "create table student_value(id INTEGER not null , name varchar(60),sex varchar(10),class_name varchar(50),school_name varchar(50));";
         db.execSQL(sql);
     }
 

@@ -132,8 +132,8 @@ public class RecycleViewActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_settings) {
-            PopupTips tips = new PopupTips(this);
-            tips.showPopupWindow();
+
+
             return true;
         }
 

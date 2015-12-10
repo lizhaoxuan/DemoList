@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * ORM 数据库操作类
- * <p>
+ * <p/>
  * Created by lizhaoxuan on 15/11/5.
  */
 public class DataSupport {
@@ -41,13 +41,14 @@ public class DataSupport {
         Class clazz = object.getClass();
         String tableName = fieldCache.getClassName(clazz);
         ArrayList<Field> fieldList = fieldCache.getFields(clazz);
+        ArrayList<String> fieldNames = fieldCache.getFieldNames(clazz);
         ArrayList<String> types = fieldCache.getFieldTypes(clazz);
         ContentValues cv = new ContentValues();//实例化一个ContentValues用来装载待插入的数据
         try {
             int length = fieldList.size();
             for (int i = 0; i < length; i++) {
                 fieldList.get(i).setAccessible(true);
-                putValue(cv, types.get(i), fieldList.get(i).getName(),
+                putValue(cv, types.get(i), fieldNames.get(i),
                         fieldList.get(i).get(object));
             }
             long i = db.insert(tableName, null, cv);//执行插入操作
@@ -63,6 +64,7 @@ public class DataSupport {
     public Object getEntity(int id, Class clazz) {
         String tableName = fieldCache.getClassName(clazz);
         ArrayList<Field> fieldList = fieldCache.getFields(clazz);
+        ArrayList<String> fieldNames = fieldCache.getFieldNames(clazz);
         ArrayList<String> types = fieldCache.getFieldTypes(clazz);
         //初始化对象
         Object entity = ReflectionTool.createObject(clazz);
@@ -77,7 +79,7 @@ public class DataSupport {
                 //开始给对象赋值
                 for (int i = 0; i < length; i++) {
                     fieldList.get(i).setAccessible(true);
-                    fieldList.get(i).set(entity, getValue(cursor, types.get(i), fieldList.get(i).getName()));
+                    fieldList.get(i).set(entity, getValue(cursor, types.get(i), fieldNames.get(i)));
                 }
             }
         } catch (Exception e) {
@@ -93,6 +95,7 @@ public class DataSupport {
     public List getAllEntity(Class clazz) {
         String tableName = fieldCache.getClassName(clazz);
         ArrayList<Field> fieldList = fieldCache.getFields(clazz);
+        ArrayList<String> fieldNames = fieldCache.getFieldNames(clazz);
         ArrayList<String> types = fieldCache.getFieldTypes(clazz);
 
         List result = new ArrayList();
@@ -107,7 +110,8 @@ public class DataSupport {
                 //开始给对象赋值
                 for (int i = 0; i < length; i++) {
                     fieldList.get(i).setAccessible(true);
-                    fieldList.get(i).set(entity, getValue(cursor, types.get(i), fieldList.get(i).getName()));
+                    fieldList.get(i).set(entity, getValue(cursor, types.get(i),
+                            fieldNames.get(i)));
                 }
                 result.add(entity);
             }
@@ -131,6 +135,7 @@ public class DataSupport {
         Class clazz = object.getClass();
         String tableName = fieldCache.getClassName(clazz);
         ArrayList<Field> fieldList = fieldCache.getFields(clazz);
+        ArrayList<String> fieldNames = fieldCache.getFieldNames(clazz);
         ArrayList<String> types = fieldCache.getFieldTypes(clazz);
 
         //实例化一个ContentValues用来装载待插入的数据
@@ -138,7 +143,8 @@ public class DataSupport {
         try {
             int length = fieldList.size();
             for (int i = 0; i < length; i++) {
-                putValue(cv, types.get(i), fieldList.get(i).getName(), fieldList.get(i).get(object));
+                putValue(cv, types.get(i), fieldNames.get(i),
+                        fieldList.get(i).get(object));
             }
             long result = db.update(tableName, cv, "id = ?", new String[]{String.valueOf(id)});
             Log.i(TAG, tableName + " 表插入结果" + result);
@@ -182,7 +188,7 @@ public class DataSupport {
         } else if (type.contains("double")) {
             return cursor.getDouble(cursor.getColumnIndex(name));
         } else {
-            Log.w(TAG, "getValue 无合适类型，为Null了");
+            Log.w(TAG, "getValue 无合适类型，为Null了  " + type);
             return null;
         }
     }

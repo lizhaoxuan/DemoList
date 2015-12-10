@@ -16,6 +16,8 @@ import com.demo.zhaoxuanli.listdemo.R;
 import com.demo.zhaoxuanli.listdemo.db_orm.orm.DataSupport;
 import com.demo.zhaoxuanli.listdemo.db_orm.orm.DatabaseHelper;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class SQLiteActivity extends AppCompatActivity {
@@ -67,22 +69,26 @@ public class SQLiteActivity extends AppCompatActivity {
             public void onClick(View v) {
                 int id = random.nextInt();
                 System.out.println(id);
-                String name = "小明"+random.nextInt();
+                String name = "小明"+random.nextInt(10);
                 String sex ;
                 if(random.nextInt()%2==0)
                     sex = "男";
                 else
                     sex = "女";
-                String className = "三年"+random.nextInt()+"班";
-                String schoolName = "上海第"+random.nextInt()+"小学";
+                String className = "三年"+random.nextInt(10)+"班";
+                String schoolName = "上海第"+random.nextInt(10)+"小学";
 
                 StudentValue sv = new StudentValue(id,name,sex,className,schoolName);
 
                 DataSupport dataSupport = DataSupport.getInstance(getApplication());
                 dataSupport.insertEntity(sv);
                 StudentValue studentValue = (StudentValue)dataSupport.getEntity(id,StudentValue.class);
-                Log.e("SQLiteActivity",studentValue.getName());
-
+                Log.e("SQLiteActivity", studentValue.getName());
+                ArrayList<StudentValue> studentValues = (ArrayList<StudentValue>)DataSupport.getInstance(getApplicationContext())
+                        .getAllEntity(StudentValue.class);
+                for (StudentValue student : studentValues){
+                    Log.i("RESULT",student.getId()+"  "+student.getName()+" "+student.getSex()+" "+student.getClassName()+" "+student.getSchoolName());
+                }
             }
         });
 

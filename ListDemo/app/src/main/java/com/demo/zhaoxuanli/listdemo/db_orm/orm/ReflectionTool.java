@@ -19,7 +19,8 @@ public class ReflectionTool {
      * @param classT
      * @param types
      */
-    public static void createProperty(Class classT, ArrayList<Field> fieldList, ArrayList<String> types) {
+    public static void createProperty(Class classT, ArrayList<Field> fields,
+                                      ArrayList<String> fieldNames , ArrayList<String> types) {
 
         Field[] _field = classT.getDeclaredFields();
         ArrayList<String> _fieldNames = new ArrayList<>();
@@ -38,9 +39,13 @@ public class ReflectionTool {
                 //如果所有的setter方法中含有属性名，那么就是要存储的
                 if (_fieldNames.contains(valueName)) {
                     int index = _fieldNames.indexOf(valueName);
-                    fieldList.add(_field[index]);  // 找到确定要保存的属性，存入List中
-                    String _type = _field[index].getGenericType().toString();
-                    types.add(CamelCaseUtils.toUnderlineName(_type)); // 类型
+                    // 保存属性
+                    fields.add(_field[index]);
+                    //保存属性名
+                    String fieldName = _field[index].getName();
+                    fieldNames.add(CamelCaseUtils.toUnderlineName(fieldName));
+                    // 保存类型
+                    types.add(_field[index].getGenericType().toString());
                 }
             }
         }

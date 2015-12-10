@@ -14,6 +14,8 @@ public class FieldCache {
 
     private ArrayMap<Class, ArrayList<Field>> fieldCache = new ArrayMap<>();
 
+    private ArrayMap<Class, ArrayList<String>> fieldNameCache = new ArrayMap<>();
+
     private ArrayMap<Class, ArrayList<String>> typeCache = new ArrayMap<>();
 
     private ArrayMap<Class, String> classCache = new ArrayMap<>();
@@ -30,13 +32,32 @@ public class FieldCache {
         ArrayList<Field> fields = fieldCache.get(clazz);
         if (fields == null) {
             fields = new ArrayList<>();
+            ArrayList<String> fieldNames = new ArrayList<>();
             ArrayList<String> types = new ArrayList<>();
-            ReflectionTool.createProperty(clazz, fields, types);
+            ReflectionTool.createProperty(clazz, fields,fieldNames, types);
+
             fieldCache.put(clazz, fields);
+            fieldNameCache.put(clazz,fieldNames);
             typeCache.put(clazz, types);
+
         }
 
         return fields;
+    }
+
+    public ArrayList<String> getFieldNames(Class clazz){
+        ArrayList<String> fieldNames = fieldNameCache.get(clazz);
+        if(fieldNames == null){
+            fieldNames = new ArrayList<>();
+            ArrayList<Field> fields = new ArrayList<>();
+            ArrayList<String> types = new ArrayList<>();
+            ReflectionTool.createProperty(clazz, fields,fieldNames, types);
+
+            fieldCache.put(clazz, fields);
+            fieldNameCache.put(clazz,fieldNames);
+            typeCache.put(clazz, types);
+        }
+        return fieldNames;
     }
 
     /**
@@ -51,8 +72,10 @@ public class FieldCache {
         if (types == null) {
             types = new ArrayList<>();
             ArrayList<Field> fields = new ArrayList<>();
-            ReflectionTool.createProperty(clazz, fields, types);
+            ArrayList<String> fieldNames = new ArrayList<>();
+            ReflectionTool.createProperty(clazz, fields,fieldNames, types);
             fieldCache.put(clazz, fields);
+            fieldNameCache.put(clazz,fieldNames);
             typeCache.put(clazz, types);
         }
 
@@ -68,7 +91,7 @@ public class FieldCache {
     public String getClassName(Class clazz) {
         String className = classCache.get(clazz);
         if (className == null) {
-            className = CamelCaseUtils.toUnderlineName(clazz.getName());
+            className = CamelCaseUtils.toUnderlineName(clazz.getSimpleName());
             classCache.put(clazz, className);
         }
         return className;
