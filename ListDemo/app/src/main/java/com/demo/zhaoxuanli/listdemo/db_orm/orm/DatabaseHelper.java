@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 /**
+ *
  * Created by lizhaoxuan on 15/11/5.
  */
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -26,7 +27,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     /**
      * 当 VERSION 变化时调用此方法
-     * 数据库的更新策略：每增加或修改一个表，必须在 onUpgrade 方法中增加该表的删除操作，
+     * 数据库的旧数据非保存 更新策略：每增加或修改一个表，必须在 onUpgrade 方法中增加该表的删除操作，
      * 避免同名表的重复创建。
      * db.execSQL("DROP TABLE IF EXISTS 新增表名"); // 如果存在，删除该表。
      * 为兼容旧版本，onUpgrade 方法内应存在过去所有历史表的删除操作。（无需考虑oldVersion）

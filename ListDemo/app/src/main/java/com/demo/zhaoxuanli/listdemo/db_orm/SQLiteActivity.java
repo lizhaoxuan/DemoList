@@ -84,7 +84,7 @@ public class SQLiteActivity extends AppCompatActivity {
                 dataSupport.insertEntity(sv);
                 StudentValue studentValue = (StudentValue)dataSupport.getEntity(id,StudentValue.class);
                 Log.e("SQLiteActivity", studentValue.getName());
-                ArrayList<StudentValue> studentValues = (ArrayList<StudentValue>)DataSupport.getInstance(getApplicationContext())
+                ArrayList<StudentValue> studentValues = DataSupport.getInstance(getApplicationContext())
                         .getAllEntity(StudentValue.class);
                 for (StudentValue student : studentValues){
                     Log.i("RESULT",student.getId()+"  "+student.getName()+" "+student.getSex()+" "+student.getClassName()+" "+student.getSchoolName());

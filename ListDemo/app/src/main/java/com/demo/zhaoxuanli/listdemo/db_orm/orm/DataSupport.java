@@ -37,13 +37,15 @@ public class DataSupport {
         return instance;
     }
 
+
     public <T> void insertEntity(T object) {
         Class clazz = object.getClass();
         String tableName = fieldCache.getClassName(clazz);
         ArrayList<Field> fieldList = fieldCache.getFields(clazz);
         ArrayList<String> fieldNames = fieldCache.getFieldNames(clazz);
         ArrayList<String> types = fieldCache.getFieldTypes(clazz);
-        ContentValues cv = new ContentValues();//实例化一个ContentValues用来装载待插入的数据
+        //实例化一个ContentValues用来装载待插入的数据
+        ContentValues cv = new ContentValues();
         try {
             int length = fieldList.size();
             for (int i = 0; i < length; i++) {
@@ -92,13 +94,13 @@ public class DataSupport {
     }
 
 
-    public List getAllEntity(Class clazz) {
+    public ArrayList getAllEntity(Class clazz) {
         String tableName = fieldCache.getClassName(clazz);
         ArrayList<Field> fieldList = fieldCache.getFields(clazz);
         ArrayList<String> fieldNames = fieldCache.getFieldNames(clazz);
         ArrayList<String> types = fieldCache.getFieldTypes(clazz);
 
-        List result = new ArrayList();
+        ArrayList result = new ArrayList();
 
         Cursor cursor = db.query(tableName, null, null, null, null, null, null, null);
         int length = fieldList.size();
