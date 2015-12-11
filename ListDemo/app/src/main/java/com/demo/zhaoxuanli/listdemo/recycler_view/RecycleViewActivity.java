@@ -14,12 +14,11 @@ import android.view.View;
 
 import com.demo.zhaoxuanli.listdemo.R;
 import com.demo.zhaoxuanli.listdemo.bluetooth.BlueToothActivity;
+import com.demo.zhaoxuanli.listdemo.combo_widget.ComboActivity;
 import com.demo.zhaoxuanli.listdemo.db_orm.SQLiteActivity;
 import com.demo.zhaoxuanli.listdemo.draw_music.MusicActivity;
 import com.demo.zhaoxuanli.listdemo.gyroscope.HeartActivity;
-import com.demo.zhaoxuanli.listdemo.custom_widget.embedded.EmbedActivity;
 import com.demo.zhaoxuanli.listdemo.music_player.MusicPlayerActivity;
-import com.demo.zhaoxuanli.listdemo.custom_widget.popup_tips.NoDataTip;
 import com.demo.zhaoxuanli.listdemo.thread_pool.ThreadPoolActivity;
 import com.demo.zhaoxuanli.listdemo.weather.WeatherActivity;
 
@@ -34,7 +33,6 @@ public class RecycleViewActivity extends AppCompatActivity {
     private SwipeRefreshLayout refreshLayout;
     private static Handler mHandler;
 
-    private NoDataTip noDataTip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +47,7 @@ public class RecycleViewActivity extends AppCompatActivity {
                 if (refreshLayout.isRefreshing()) {
                     refreshLayout.setRefreshing(false);
                 }
-                //TopToast.makeText(RecycleViewActivity.this,"没有什么可刷新的，就是给你看一下").showPopupWindow(myRecycleView,TopToast.TitleHeight);
-//                if (noDataTip.isShowing())
-//                    noDataTip.hide();
-//                else
-//                    noDataTip.show(myRecycleView);
+
             }
         };
 
@@ -115,7 +109,7 @@ public class RecycleViewActivity extends AppCompatActivity {
         myDatas.add(new ItemValue(6, "蓝牙",
                 "打开蓝牙连接，进行搜索，即可选取蓝牙进行连接", BlueToothActivity.class));
         myDatas.add(new ItemValue(6, "动态控件封装",
-                "封装NoDataTips,TopTips,Loading,ToolBar", EmbedActivity.class));
+                "封装NoDataTips,TopTips,Loading,ToolBar", ComboActivity.class));
 
 
     }

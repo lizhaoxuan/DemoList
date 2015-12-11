@@ -5,4 +5,166 @@
     <color name="alpha_white">#60FAFAFA</color>
     <color name="pale_yellow">#FFEC8B</color>
     <color name="red">#FF3030</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <!--
+    color 命名规则：
+    1.无透明度——六位，命名规则为颜色_tag_序号，例:black_tag_1
+    2.有透明度设置——八位，命名规则为颜色_tag_序号，例:black_tag_1
+    3.功能模块，命名规则为：
+    模块名称_功用（背景，divider等）_其他（按钮等，按下抬起等）,颜色引用前两部分内容
+    -->
+
+    <!-- 白色系 -->
+    <color name="white_tag_1">#FFFFFF</color>
+    <color name="white_tag_2">#22FFFFFF</color>
+    <color name="white_tag_3">#88FFFFFF</color>
+    <color name="white_tag_4">#33FFFFFF</color>
+    <!-- 白色系 end -->
+
+    <!-- 黑色系 -->
+    <color name="black_tag_1">#000000</color>
+    <color name="black_tag_2">#88000000</color>
+    <color name="black_tag_3">#333333</color>
+    <!-- 黑色系 end -->
+
+    <!-- 灰色系 -->
+    <color name="gray_tag_1">#EBEBEB</color>
+    <color name="gray_tag_2">#E4E6EB</color>
+    <color name="gray_tag_3">#D3D3D3</color>
+    <color name="gray_tag_4">#bfb9b9</color>
+    <color name="gray_tag_5">#a9a9a9</color>
+    <color name="gray_tag_6">#898686</color>
+    <color name="gray_tag_7">#808080</color>
+    <color name="gray_tag_8">#6d6d6d</color>
+    <color name="gray_tag_9">#999999</color>
+    <color name="gray_tag_10">#ff34393d</color>
+    <color name="gray_tag_11">#ff4a5158</color>
+    <color name="gray_tag_12">#ff16181a</color>
+    <color name="gray_tag_13">#dd15242f</color>
+    <color name="gray_tag_14">#aa091b1a</color>
+    <color name="gray_tag_15">#ff707070</color>
+    <color name="gray_tag_16">#ff555555</color>
+    <color name="gray_tag_17">#01000000</color>
+    <color name="gray_tag_18">#44000000</color>
+    <color name="gray_tag_19">#56000000</color>
+    <color name="gray_tag_20">#3f000000</color>
+    <color name="gray_tag_21">#d7d7d7</color>
+    <color name="gray_tag_22">#666666</color>
+    <color name="gray_tag_23">#eeeeee</color>
+    <color name="gray_tag_24">#666666</color>
+    <color name="gray_tag_25">#EBEAF0</color>
+    <color name="gray_tag_26">#F5F4F9</color>
+    <color name="gray_tag_27">#F2F2F2</color>
+    <color name="gray_tag_28">#cccccc</color>
+    <color name="gray_tag_29">#F4F5F9</color>
+    <!-- 灰色系 end -->
+
+    <!-- 红色系 -->
+    <color name="red_tag_1">#FF4444</color>
+    <color name="red_tag_2">#ee3d2b</color>
+    <color name="red_tag_3">#CC0000</color>
+    <color name="red_tag_4">#FF0000</color>
+    <color name="red_tag_5">#ff962626</color>
+    <color name="red_tag_6">#ffe52e3d</color>
+    <color name="red_tag_7">#EE3D2B</color>
+    <color name="red_tag_8">#FF9933</color>
+    <color name="red_tag_9">#AF0308</color>
+    <!-- 红色系 end -->
+
+    <!-- 黄色系 -->
+    <color name="orange_tag_1">#d49669</color>
+    <color name="orange_tag_2">#FFBB33</color>
+    <color name="orange_tag_3">#d66919</color>
+    <color name="orange_tag_4">#ff948829</color>
+    <color name="orange_tag_5">#ffb9b226</color>
+    <color name="yellow_tag_1">#e3c67a</color>
+    <color name="yellow_tag_2">#FFEC8B</color>
+    <color name="yellow_tag_3">#F6e18e</color>
+    <!-- 黄色系 end -->
+
+    <!-- 蓝色系 -->
+    <color name="blue_tag_1">#0bb2fd</color>
+    <color name="blue_tag_2">#0EAFEF</color>
+    <color name="blue_tag_3">#33B5E5</color>
+    <color name="blue_tag_4">#19bccf</color>
+    <color name="blue_tag_5">#009ACD</color>
+    <color name="blue_tag_6">#1789C3</color>
+    <color name="blue_tag_7">#1B77A6</color>
+    <color name="blue_tag_8">#104E8B</color>
+    <color name="blue_tag_9">#061CAC</color>
+    <color name="blue_tag_10">#284e7d</color>
+    <color name="blue_tag_11">#606A93</color>
+    <color name="blue_tag_12">#0000ff</color>
+    <color name="blue_tag_13">#000080</color>
+    <color name="blue_tag_14">#1c394e</color>
+    <color name="blue_tag_15">#283d50</color>
+    <color name="blue_tag_16">#192936</color>
+    <color name="blue_tag_17">#ff263d52</color>
+    <color name="blue_tag_18">#ff295f89</color>
+    <color name="blue_tag_19">#ff366c96</color>
+    <color name="blue_tag_20">#FF335468</color>
+    <color name="blue_tag_21">#FF254154</color>
+    <color name="blue_tag_22">#FF1C2E3C</color>
+    <color name="blue_tag_23">#ff408dcb</color>
+    <color name="blue_tag_24">#ff4d9ad8</color>
+    <color name="blue_tag_25">#df162531</color>
+    <color name="blue_tag_26">#bb0d161c</color>
+    <color name="blue_tag_27">#8fbbcd</color>
+    <color name="blue_tag_28">#25578a</color>
+    <color name="blue_tag_29">#3273a9</color>
+    <color name="blue_tag_30">#36a0d2</color>
+    <color name="blue_tag_31">#007aff</color>
+    <!-- 蓝色系 end -->
+
+    <!-- 绿色系 begin -->
+    <color name="green_tag_1">#00ff00</color>
+    <color name="green_tag_2">#99CC00</color>
+    <color name="green_tag_3">#189C47</color>
+    <color name="green_tag_4">#143b36</color>
+    <color name="green_tag_5">#0e2b28</color>
+    <color name="green_tag_6">#ff458d50</color>
+    <color name="green_tag_7">#ff5fb74b</color>
+    <color name="green_tag_8">#7700ff00</color>
+    <!-- 绿色系 end -->
+
+    <!-- 颜色功能模块调用 begin -->
+    <!-- actionbar begin -->
+    <item name="actionbar_tab_default" type="color">@color/blue_tag_20</item>
+    <item name="actionbar_tab_pressed" type="color">@color/blue_tag_25</item>
+    <item name="actionbar_background" type="color">@color/blue_tag_4</item>
+    <!-- actionbar end -->
+
+    <!-- 远景精神图表 begin -->
+    <item name="envision_challenge_chart_will" type="color">@color/blue_tag_28</item>
+    <item name="envision_challenge_chart_wisdom" type="color">@color/blue_tag_29</item>
+    <item name="envision_challenge_chart_caritas" type="color">@color/blue_tag_30</item>
+    <item name="envision_challenge_chart_border" type="color">@color/gray_tag_22</item>
+    <item name="envision_challenge_chart_category_text_color" type="color">@color/black_tag_1</item>
+    <!-- 远景精神图表 end -->
+
+    <!-- 远景精神列表 begin -->
+    <item name="envision_challenge_text_color" type="color">@color/black_tag_2</item>
+    <!-- 远景精神列表 end -->
+
+    <!-- home begin -->
+    <item name="home_tab_light" type="color">@color/red_tag_7</item>
+    <item name="home_tab_default" type="color">@color/gray_tag_24</item>
+    <item name="home_leave_message_to_him" type="color">@color/blue_tag_31</item>
+    <item name="home_title" type="color">@color/gray_tag_23</item>
+    <!-- home end -->
+
+    <!-- common begin -->
+    <item name="common_challenge_head_blue" type="color">@color/blue_tag_10</item>
+    <item name="common_background" type="color">@color/gray_tag_29</item>
+    <!-- common end -->
+    <!-- 颜色功能模块调用 end -->
+
+    <item name="cl_actionbar_bg" type="color">#393F4B</item>
+    <color name="cl_actionbar_default">#393F4B</color>
+    <color name="cl_actionbar_btn">#282C34</color>
+    <color name="cl_actionbar_press">#eee</color>
+    <color name="cl_textview">#eee</color>
+    <color name="cl_transparent">#00ffffff</color>
 </resources>

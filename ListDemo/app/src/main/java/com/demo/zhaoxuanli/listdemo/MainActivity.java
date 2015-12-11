@@ -11,7 +11,7 @@ import com.demo.zhaoxuanli.listdemo.recycler_view.RecycleViewActivity;
 
 
 /**
- * MainActivity Loading动态图效果
+ * ComboActivity Loading动态图效果
  * 外层：recycleView（可展开显示详情）+可变化title+后期添加下拉刷新
  * <p>
  * ----------------以OK --------------

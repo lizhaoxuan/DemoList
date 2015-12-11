@@ -18,12 +18,6 @@
         android:text="显示TopTips" />
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="隐藏TopTips" />
-
-    <Button
         android:id="@+id/button3"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -34,17 +28,5 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:text="隐藏NoDataTips" />
-
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="显示Loading" />
-
-    <Button
-        android:id="@+id/button6"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="隐藏Loading" />
 
 </LinearLayout>

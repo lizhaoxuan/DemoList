@@ -14,4 +14,8 @@
     <declare-styleable name="TopToast">
         <attr name="android:text" />
     </declare-styleable>
+
+    <declare-styleable name="NoDataTips">
+        <attr name="android:text" />
+    </declare-styleable>
 </resources>

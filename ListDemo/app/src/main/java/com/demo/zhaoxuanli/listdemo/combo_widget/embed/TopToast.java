@@ -1,4 +1,4 @@
-package com.demo.zhaoxuanli.listdemo.custom_widget.embedded;
+package com.demo.zhaoxuanli.listdemo.combo_widget.embed;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -8,6 +8,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.demo.zhaoxuanli.listdemo.R;
+
 
 /**
  * Created by lizhaoxuan on 15/12/4.

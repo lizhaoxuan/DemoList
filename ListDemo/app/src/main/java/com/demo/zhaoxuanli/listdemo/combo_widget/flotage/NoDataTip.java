@@ -1,4 +1,4 @@
-package com.demo.zhaoxuanli.listdemo.custom_widget.popup_tips;
+package com.demo.zhaoxuanli.listdemo.combo_widget.flotage;
 
 import android.app.Activity;
 import android.graphics.Rect;
@@ -11,6 +11,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+
 
 import com.demo.zhaoxuanli.listdemo.R;
 
@@ -34,7 +35,9 @@ public class NoDataTip {
     private ImageView imageView;
     private TextView textView;
 
-    /**目标数据集，通过该数据集判断是否显示**/
+    /**
+     * 目标数据集，通过该数据集判断是否显示
+     **/
     private List dataSet;
 
     public NoDataTip(Activity context, int drawableId, String tip) {
@@ -47,7 +50,9 @@ public class NoDataTip {
     public NoDataTip(Activity context, Drawable drawable, String tip) {
         this.activity = context;
         initView();
-        imageView.setImageDrawable(drawable);
+        if (drawable != null) {
+            imageView.setImageDrawable(drawable);
+        }
         textView.setText(tip);
     }
 
@@ -73,8 +78,8 @@ public class NoDataTip {
      * 当TitleHeight ||  MenuWidth的值为0时，才重新获取。
      * 免去每次创建都计算Popup高度等信息，提高效率
      */
-    private void initTipsData(){
-        if(TitleHeight <=0 ||StateHeight == 0){
+    private void initTipsData() {
+        if (TitleHeight <= 0 || StateHeight == 0) {
             DisplayMetrics metric = new DisplayMetrics();
             activity.getWindowManager().getDefaultDisplay().getMetrics(metric);
             Rect outRect = new Rect();
@@ -82,9 +87,8 @@ public class NoDataTip {
             StateHeight = outRect.top;
 
             TypedValue tv = new TypedValue();
-            if (activity.getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true))
-            {
-                TitleHeight =outRect.top + TypedValue.complexToDimensionPixelSize(tv.data, activity.getResources().getDisplayMetrics());
+            if (activity.getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
+                TitleHeight = outRect.top + TypedValue.complexToDimensionPixelSize(tv.data, activity.getResources().getDisplayMetrics());
             }
             //activity.getWindow().findViewById(Window.ID_ANDROID_CONTENT).getTop();  //获取普通标题栏大小
 
@@ -99,17 +103,21 @@ public class NoDataTip {
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
     }
 
-    public void show(View view,int belowHeight) {
+    public void show(View view, int belowHeight) {
         if (popupWindow == null) {
             initView();
         }
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, belowHeight);
     }
+
     public void hide() {
         popupWindow.dismiss();
     }
 
     public boolean isShowing() {
+        if (popupWindow == null){
+            return false;
+        }
         return popupWindow.isShowing();
     }
 
@@ -129,14 +137,5 @@ public class NoDataTip {
         return textView.getText().toString();
     }
 
-    public void bindDataSet(List dataSet){
-        this.dataSet = dataSet;
-    }
-
-    public void doNoDataTip(){
-        if (dataSet.isEmpty()){
-
-        }
-    }
 
 }

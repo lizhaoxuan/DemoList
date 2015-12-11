@@ -1,4 +1,4 @@
-package com.demo.zhaoxuanli.listdemo.custom_widget.embedded;
+package com.demo.zhaoxuanli.listdemo.combo_widget.embed;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -11,7 +11,9 @@ import android.widget.TextView;
 
 import com.demo.zhaoxuanli.listdemo.R;
 
+
 /**
+ * 自定义控件 NoDataTips
  * Created by lizhaoxuan on 15/12/4.
  */
 public class NoDataTips extends LinearLayout {
@@ -52,8 +54,8 @@ public class NoDataTips extends LinearLayout {
         if (attrs == null) {
             return;
         } else {
-            TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.TopToast);
-            CharSequence keyStr = a.getText(R.styleable.TopToast_android_text);
+            TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.NoDataTips);
+            CharSequence keyStr = a.getText(R.styleable.NoDataTips_android_text);
             if (keyStr != null) {
                 textView.setText(keyStr);
             }
