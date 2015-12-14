@@ -22,71 +22,61 @@ public class FieldCache {
 
 
     /**
-     * 取得Filed缓存，如果不存在，则获取
-     * Filed和type是同时获取，某个不存在，则都不存在
+     * 取得Filed type缓存，如果不存在，则获取
+     * Filed、FiledName 和FiledType是同时获取，某个不存在，则都不存在
      *
-     * @param clazz
-     * @return
+     * @param clazz class类
      */
     public ArrayList<Field> getFields(Class clazz) {
         ArrayList<Field> fields = fieldCache.get(clazz);
         if (fields == null) {
             fields = new ArrayList<>();
-            ArrayList<String> fieldNames = new ArrayList<>();
-            ArrayList<String> types = new ArrayList<>();
-            ReflectionTool.createProperty(clazz, fields,fieldNames, types);
-
-            fieldCache.put(clazz, fields);
-            fieldNameCache.put(clazz,fieldNames);
-            typeCache.put(clazz, types);
-
+            putValue(fields, new ArrayList<String>(), new ArrayList<String>(), clazz);
         }
 
         return fields;
     }
 
-    public ArrayList<String> getFieldNames(Class clazz){
+    public ArrayList<String> getFieldNames(Class clazz) {
         ArrayList<String> fieldNames = fieldNameCache.get(clazz);
-        if(fieldNames == null){
+        if (fieldNames == null) {
             fieldNames = new ArrayList<>();
-            ArrayList<Field> fields = new ArrayList<>();
-            ArrayList<String> types = new ArrayList<>();
-            ReflectionTool.createProperty(clazz, fields,fieldNames, types);
+            putValue(new ArrayList<Field>(), fieldNames, new ArrayList<String>(), clazz);
 
-            fieldCache.put(clazz, fields);
-            fieldNameCache.put(clazz,fieldNames);
-            typeCache.put(clazz, types);
         }
         return fieldNames;
     }
 
-    /**
-     * 取得Filed type缓存，如果不存在，则获取
-     * Filed和type是同时获取，某个不存在，则都不存在
-     *
-     * @param clazz
-     * @return
-     */
     public ArrayList<String> getFieldTypes(Class clazz) {
         ArrayList<String> types = typeCache.get(clazz);
         if (types == null) {
             types = new ArrayList<>();
-            ArrayList<Field> fields = new ArrayList<>();
-            ArrayList<String> fieldNames = new ArrayList<>();
-            ReflectionTool.createProperty(clazz, fields,fieldNames, types);
-            fieldCache.put(clazz, fields);
-            fieldNameCache.put(clazz,fieldNames);
-            typeCache.put(clazz, types);
+            putValue(new ArrayList<Field>(), new ArrayList<String>(), types, clazz);
         }
 
         return types;
     }
 
     /**
+     * 增加新的属性缓存
+     *
+     * @param fields 字段
+     * @param names  字段名
+     * @param types  字段类型
+     * @param clazz  class 类
+     */
+    private void putValue(ArrayList<Field> fields, ArrayList<String> names, ArrayList<String> types, Class clazz) {
+        ReflectionTool.createProperty(clazz, fields, names, types);
+        fieldCache.put(clazz, fields);
+        fieldNameCache.put(clazz, names);
+        typeCache.put(clazz, types);
+    }
+
+    /**
      * 取得Class 下划线式命名，避免重复判断
      *
-     * @param clazz
-     * @return
+     * @param clazz class 类
+     * @return 下划线格式类名
      */
     public String getClassName(Class clazz) {
         String className = classCache.get(clazz);

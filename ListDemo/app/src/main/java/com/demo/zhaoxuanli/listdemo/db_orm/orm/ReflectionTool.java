@@ -15,12 +15,13 @@ public class ReflectionTool {
 
     /**
      * 筛选需要存到数据库的属性
+     * 选择条件为 所有带有Setter方法的属性
      *
      * @param classT
      * @param types
      */
     public static void createProperty(Class classT, ArrayList<Field> fields,
-                                      ArrayList<String> fieldNames , ArrayList<String> types) {
+                                      ArrayList<String> fieldNames, ArrayList<String> types) {
 
         Field[] _field = classT.getDeclaredFields();
         ArrayList<String> _fieldNames = new ArrayList<>();
@@ -41,7 +42,7 @@ public class ReflectionTool {
                     int index = _fieldNames.indexOf(valueName);
                     // 保存属性
                     fields.add(_field[index]);
-                    //保存属性名
+                    //保存属性名,并转换为下划线格式
                     String fieldName = _field[index].getName();
                     fieldNames.add(CamelCaseUtils.toUnderlineName(fieldName));
                     // 保存类型

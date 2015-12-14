@@ -1,5 +1,6 @@
 package com.demo.zhaoxuanli.listdemo.db_orm.orm;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,10 +14,10 @@ public interface IDataSupport {
 
     <T> T getEntity(int id ,Class clazz);
 
-    <T> List<T> getAllEntity(Class clazz);
+    ArrayList getAllEntity(Class clazz);
 
-    <T> void deleteEntity(int id,Class clazz);
+    <T> int deleteEntity(int id,Class clazz);
 
-    <T> void changeEntity(int id,T entity);
+    <T> long changeEntity(int id,T entity);
 
 }

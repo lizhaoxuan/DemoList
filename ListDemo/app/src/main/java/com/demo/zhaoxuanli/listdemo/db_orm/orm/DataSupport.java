@@ -15,10 +15,10 @@ import java.util.List;
 
 /**
  * ORM 数据库操作类
- * <p/>
+ * <p>
  * Created by lizhaoxuan on 15/11/5.
  */
-public class DataSupport {
+public class DataSupport implements IDataSupport {
     private static final String TAG = DataSupport.class.getName();
     private static SQLiteDatabase db;
 
@@ -27,11 +27,11 @@ public class DataSupport {
     /*field缓存，避免重复获取*/
     private static FieldCache fieldCache;
 
-    private static  ArrayMap<Class,String> createTableSql = new ArrayMap<>();
+    private static ArrayMap<Class, String> createTableSql = new ArrayMap<>();
 
     private DataSupport(Context context) {
 
-        createTableSql.put(StudentValue.class,Strs.STUDENT);
+        createTableSql.put(StudentValue.class, Strs.STUDENT);
 
         DatabaseHelper database = new DatabaseHelper(context);
         db = database.getWritableDatabase();
@@ -45,7 +45,7 @@ public class DataSupport {
         return instance;
     }
 
-
+    @Override
     public <T> void insertEntity(T object) {
         Class clazz = object.getClass();
         String tableName = fieldCache.getClassName(clazz);
@@ -71,6 +71,39 @@ public class DataSupport {
         }
     }
 
+    @Override
+    public <T> void insertEntity(List<T> entityList) {
+        if (entityList.isEmpty()) {
+            return;
+        }
+        Class clazz = entityList.get(0).getClass();
+        String tableName = fieldCache.getClassName(clazz);
+        ArrayList<Field> fieldList = fieldCache.getFields(clazz);
+        ArrayList<String> fieldNames = fieldCache.getFieldNames(clazz);
+        ArrayList<String> types = fieldCache.getFieldTypes(clazz);
+        int listSize = entityList.size();
+        int fieldLength = fieldList.size();
+        //实例化一个ContentValues用来装载待插入的数据
+        ContentValues cv = new ContentValues();
+        for (int position = 0; position < listSize; position++) {
+            try {
+                for (int i = 0; i < fieldLength; i++) {
+                    fieldList.get(i).setAccessible(true);
+                    putValue(cv, types.get(i), fieldNames.get(i),
+                            fieldList.get(i).get(entityList.get(position)));
+                }
+                long result = db.insert(tableName, null, cv);//执行插入操作
+
+                Log.i(TAG, entityList.get(position).getClass().getName() + " 插入结果 ： " + result);
+            } catch (Exception e) {
+                e.getStackTrace();
+            } finally {
+                cv.clear();
+            }
+        }
+    }
+
+    @Override
     public Object getEntity(int id, Class clazz) {
         String tableName = fieldCache.getClassName(clazz);
         ArrayList<Field> fieldList = fieldCache.getFields(clazz);
@@ -101,7 +134,7 @@ public class DataSupport {
         return entity;
     }
 
-
+    @Override
     public ArrayList getAllEntity(Class clazz) {
         String tableName = fieldCache.getClassName(clazz);
         ArrayList<Field> fieldList = fieldCache.getFields(clazz);
@@ -134,6 +167,7 @@ public class DataSupport {
         return result;
     }
 
+    @Override
     public int deleteEntity(int id, Class clazz) {
         String tableName = fieldCache.getClassName(clazz);
         String whereClause = "id=?";
@@ -141,7 +175,10 @@ public class DataSupport {
         return db.delete(tableName, whereClause, whereArgs);
     }
 
-    public <T> void changeEntity(int id, T object) {
+
+    @Override
+    public <T> long changeEntity(int id, T object) {
+        long result = 0;
         Class clazz = object.getClass();
         String tableName = fieldCache.getClassName(clazz);
         ArrayList<Field> fieldList = fieldCache.getFields(clazz);
@@ -156,11 +193,12 @@ public class DataSupport {
                 putValue(cv, types.get(i), fieldNames.get(i),
                         fieldList.get(i).get(object));
             }
-            long result = db.update(tableName, cv, "id = ?", new String[]{String.valueOf(id)});
+            result = db.update(tableName, cv, "id = ?", new String[]{String.valueOf(id)});
             Log.i(TAG, tableName + " 表插入结果" + result);
         } catch (Exception e) {
             e.getStackTrace();
         }
+        return result;
     }
 
 
@@ -173,7 +211,7 @@ public class DataSupport {
      * @param object
      */
     private static void putValue(ContentValues cv, String type, String name, Object object) {
-        if (type.contains("String") || type.contains("String")) {
+        if (type.contains("String")) {
             cv.put(name, (String) object);
         } else if (type.contains("int")) {
             cv.put(name, (int) object);
@@ -203,7 +241,7 @@ public class DataSupport {
         }
     }
 
-    private boolean checkTableVersion(){
+    private boolean checkTableVersion() {
         return false;
     }
 
