@@ -4,10 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.v4.util.ArrayMap;
 import android.util.Log;
-
-import com.demo.zhaoxuanli.listdemo.db_orm.StudentValue;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -15,7 +12,7 @@ import java.util.List;
 
 /**
  * ORM 数据库操作类
- * <p>
+ * <p/>
  * Created by lizhaoxuan on 15/11/5.
  */
 public class DataSupport implements IDataSupport {
@@ -27,12 +24,7 @@ public class DataSupport implements IDataSupport {
     /*field缓存，避免重复获取*/
     private static FieldCache fieldCache;
 
-    private static ArrayMap<Class, String> createTableSql = new ArrayMap<>();
-
     private DataSupport(Context context) {
-
-        createTableSql.put(StudentValue.class, Strs.STUDENT);
-
         DatabaseHelper database = new DatabaseHelper(context);
         db = database.getWritableDatabase();
         fieldCache = new FieldCache();
