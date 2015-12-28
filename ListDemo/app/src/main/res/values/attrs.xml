@@ -18,4 +18,12 @@
     <declare-styleable name="NoDataTips">
         <attr name="android:text" />
     </declare-styleable>
+
+    <declare-styleable name="ScrollBanner">
+        <attr name="height" format="dimension"/>
+        <attr name="orientation">
+            <enum name="horizontal" value="1" />
+            <enum name="vertical" value="0" />
+        </attr>
+    </declare-styleable>
 </resources>

@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.demo.zhaoxuanli.listdemo.R;
+import com.demo.zhaoxuanli.listdemo.ScrollBanner.ScrollBannerActivity;
 import com.demo.zhaoxuanli.listdemo.bluetooth.BlueToothActivity;
 import com.demo.zhaoxuanli.listdemo.combo_widget.ComboActivity;
 import com.demo.zhaoxuanli.listdemo.db_orm.SQLiteActivity;
@@ -106,11 +107,12 @@ public class RecycleViewActivity extends AppCompatActivity {
                 "通过Service播放音乐，同时自定义通知栏消息，可对音乐进行控制", MusicPlayerActivity.class));
         myDatas.add(new ItemValue(6, "自定义orm数据库框架操作",
                 "打开蓝牙连接，进行搜索，即可选取蓝牙进行连接", SQLiteActivity.class));
-        myDatas.add(new ItemValue(6, "蓝牙",
+        myDatas.add(new ItemValue(7, "蓝牙",
                 "打开蓝牙连接，进行搜索，即可选取蓝牙进行连接", BlueToothActivity.class));
-        myDatas.add(new ItemValue(6, "动态控件封装",
+        myDatas.add(new ItemValue(8, "动态控件封装",
                 "封装NoDataTips,TopTips,Loading,ToolBar", ComboActivity.class));
-
+        myDatas.add(new ItemValue(10, "ScrollBanner",
+                "自动滚动banner", ScrollBannerActivity.class));
 
     }
 
