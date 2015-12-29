@@ -75,6 +75,7 @@ public class ScrollBanner extends LinearLayout {
 
     private void init(Context context, AttributeSet attrs) {
         this.setOrientation(VERTICAL);
+
         mHandler = new BannerHandler(this);
         mGesture = new GestureDetector(context, new GestureListener());
         if (attrs == null) {
@@ -82,21 +83,24 @@ public class ScrollBanner extends LinearLayout {
             return;
         }
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ScrollBanner);
-        mBannerHeight = (int) a.getDimension(R.styleable.ScrollBanner_height, context.getResources().getDimension(R.dimen.banner_width));
+        mBannerHeight = (int) a.getDimension(R.styleable.ScrollBanner_banner_height, context.getResources().getDimension(R.dimen.banner_width));
         mOrientation = a.getInt(R.styleable.ScrollBanner_orientation, ORIENTATION_VERTICAL);
         a.recycle();
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, mBannerHeight);
+        this.setLayoutParams(layoutParams);
     }
 
     public void setAdapter(ScrollBannerAdapter adapter) {
         mAdapter = adapter;
 
-        LinearLayout.LayoutParams mLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, mBannerHeight);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, mBannerHeight);
         if (mScrollBanners != null) {
             return;
         }
         mScrollBanners = new View[]{mAdapter.getView(0, null), mAdapter.getView(0, null)};
-        this.addView(mScrollBanners[0], mLayoutParams);
-        this.addView(mScrollBanners[1], mLayoutParams);
+        this.addView(mScrollBanners[0], layoutParams);
+        this.addView(mScrollBanners[1], layoutParams);
+        mShowPosition = (mShowPosition + 1) % mAdapter.getCount();
         mScrollBanners[0].setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -147,8 +151,10 @@ public class ScrollBanner extends LinearLayout {
             //如果正在进行轮播，就不能再发出开始轮播命令
             return;
         }
+        showCustomBanner();
+        int time = mAdapter.getWheelTime(0);
         mHandler.removeCallbacks(delayRunable);
-        mHandler.post(delayRunable);
+        mHandler.postDelayed(delayRunable, time);
     }
 
     /**
@@ -187,7 +193,7 @@ public class ScrollBanner extends LinearLayout {
     public void nextOfModel(int position, int orientation) {
         mScrollBanners[1 - mViewPosition] = mAdapter.getView(position, mScrollBanners[1 - mViewPosition]);
         showNext(orientation);
-        mShowPosition = position;
+        mShowPosition = (position + 1) % mAdapter.getCount();
     }
 
     /**
@@ -199,7 +205,7 @@ public class ScrollBanner extends LinearLayout {
         mHandler.removeCallbacks(delayRunable);
         mScrollBanners[1 - mViewPosition] = mAdapter.getView(position, mScrollBanners[1 - mViewPosition]);
         showOnlyOne();
-        mShowPosition = position;
+        mShowPosition = (position + 1) % mAdapter.getCount();
     }
 
     /**
@@ -270,14 +276,15 @@ public class ScrollBanner extends LinearLayout {
      * @param v2 当前View
      */
     private void startHorizontalAnimation(View v1, View v2) {
+        int width = this.getWidth();
         ObjectAnimator anim1 = ObjectAnimator.ofFloat(v1,
-                "y", -mBannerHeight, 0f);
+                "y", 0f, 0f);
         ObjectAnimator anim2 = ObjectAnimator.ofFloat(v1,
-                "x", 0f, 0f);
+                "x", -width, 0f);
         ObjectAnimator anim3 = ObjectAnimator.ofFloat(v2,
-                "y", 0f, mBannerHeight);
+                "y", 0f, 0f);
         ObjectAnimator anim4 = ObjectAnimator.ofFloat(v2,
-                "x", 0f, 0f);
+                "x", 0f, width);
         AnimatorSet animSet = new AnimatorSet();
         animSet.play(anim1).with(anim2).with(anim3).with(anim4);
         animSet.setDuration(500);

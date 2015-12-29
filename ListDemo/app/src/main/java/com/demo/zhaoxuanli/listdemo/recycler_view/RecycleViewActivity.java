@@ -20,6 +20,7 @@ import com.demo.zhaoxuanli.listdemo.db_orm.SQLiteActivity;
 import com.demo.zhaoxuanli.listdemo.draw_music.MusicActivity;
 import com.demo.zhaoxuanli.listdemo.gyroscope.HeartActivity;
 import com.demo.zhaoxuanli.listdemo.music_player.MusicPlayerActivity;
+import com.demo.zhaoxuanli.listdemo.teach_case.TeachCaseActivity;
 import com.demo.zhaoxuanli.listdemo.thread_pool.ThreadPoolActivity;
 import com.demo.zhaoxuanli.listdemo.weather.WeatherActivity;
 
@@ -111,8 +112,10 @@ public class RecycleViewActivity extends AppCompatActivity {
                 "打开蓝牙连接，进行搜索，即可选取蓝牙进行连接", BlueToothActivity.class));
         myDatas.add(new ItemValue(8, "动态控件封装",
                 "封装NoDataTips,TopTips,Loading,ToolBar", ComboActivity.class));
-        myDatas.add(new ItemValue(10, "ScrollBanner",
+        myDatas.add(new ItemValue(9, "ScrollBanner",
                 "自动滚动banner", ScrollBannerActivity.class));
+        myDatas.add(new ItemValue(10, "TeachCase",
+                "新手提示控件", TeachCaseActivity.class));
 
     }
 

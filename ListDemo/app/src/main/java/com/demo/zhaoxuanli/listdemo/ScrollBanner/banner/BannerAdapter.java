@@ -1,6 +1,7 @@
 package com.demo.zhaoxuanli.listdemo.ScrollBanner.banner;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -62,7 +63,7 @@ public class BannerAdapter extends ScrollBannerAdapter<BannerDto> {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-
+        convertView.setBackgroundColor(Color.parseColor(bannerDto.getBgColor()));
         viewHolder.titleText.setText(bannerDto.getTitle());
         return convertView;
     }

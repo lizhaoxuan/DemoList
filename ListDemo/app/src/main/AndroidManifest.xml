@@ -75,6 +75,8 @@
         </activity>
         <activity android:name=".ScrollBanner.ScrollBannerActivity" >
         </activity>
+        <activity android:name=".teach_case.TeachCaseActivity" >
+        </activity>
     </application>
 
 </manifest>

@@ -20,7 +20,7 @@
     </declare-styleable>
 
     <declare-styleable name="ScrollBanner">
-        <attr name="height" format="dimension"/>
+        <attr name="banner_height" format="dimension"/>
         <attr name="orientation">
             <enum name="horizontal" value="1" />
             <enum name="vertical" value="0" />
