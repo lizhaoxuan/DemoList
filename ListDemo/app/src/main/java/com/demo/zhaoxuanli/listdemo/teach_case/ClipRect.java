@@ -1,10 +1,14 @@
 package com.demo.zhaoxuanli.listdemo.teach_case;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
 import android.graphics.Region;
 import android.util.AttributeSet;
 import android.view.View;
@@ -38,57 +42,22 @@ public class ClipRect extends View{
         mPath = new Path();
     }
     protected void onDraw(Canvas canvas){
-        canvas.drawColor(Color.GRAY);
-        canvas.save();
-        canvas.translate(10, 10);
-        drawScene(canvas);
-        canvas.restore();
+        Bitmap bitmap ;
+        bitmap = Bitmap.createBitmap(1000, 1000, Bitmap.Config.ARGB_8888);
+        Canvas myCanvas = new Canvas(bitmap);
+        int width = 1000;
+        int height =1000;
+        Paint paint = new Paint();
+        paint.setColor(Color.BLUE);
+        //全屏绘制一个蓝色的矩形画面
+        myCanvas.drawColor(0xF0888888);
+        paint.setColor(0xFFFFFFFF);
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+        paint.setFlags(Paint.ANTI_ALIAS_FLAG);
+        myCanvas.drawCircle(150,150,100,paint);
 
+        canvas.drawBitmap(bitmap, 0, 0, null);
 
-
-
-        canvas.save();
-        canvas.translate(160, 10);
-        canvas.clipRect(10, 10, 90, 90);
-        canvas.clipRect(30, 30, 70, 70, Region.Op.DIFFERENCE);
-        drawScene(canvas);
-        canvas.restore();
-
-
-
-        canvas.save();
-        canvas.translate(10, 160);
-        canvas.clipRect(10, 10, 90, 90);
-        canvas.clipRect(30, 30, 70, 70, Region.Op.REPLACE);
-        drawScene(canvas);
-        canvas.restore();
-
-
-
-        canvas.save();
-        canvas.translate(160, 160);
-        canvas.clipRect(10, 10, 90, 90);
-        canvas.clipRect(30, 30, 70, 70, Region.Op.REVERSE_DIFFERENCE);
-        drawScene(canvas);
-        canvas.restore();
-
-
-
-        canvas.save();
-        canvas.translate(10, 310);
-        canvas.clipRect(10, 10, 90, 90);
-        canvas.clipRect(30, 30, 70, 70, Region.Op.INTERSECT);
-        drawScene(canvas);
-        canvas.restore();
-
-
-
-        canvas.save();
-        canvas.translate(160, 310);
-        canvas.clipRect(10, 10, 90, 90);
-        canvas.clipRect(30, 30, 70, 70, Region.Op.UNION);
-        drawScene(canvas);
-        canvas.restore();
     }
     private void drawScene(Canvas canvas) {
         canvas.clipRect(0, 0, 100, 100);

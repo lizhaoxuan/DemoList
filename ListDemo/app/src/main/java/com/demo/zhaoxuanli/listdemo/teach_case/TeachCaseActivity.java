@@ -27,7 +27,7 @@ public class TeachCaseActivity extends AppCompatActivity {
 
     private void doSomeThing(){
 
-        Log.d(TAG,"收到message");
+        //Log.d(TAG,"收到message");
 
     }
 
