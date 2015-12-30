@@ -16,8 +16,7 @@
         android:id="@+id/scrollBanner"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:visibility="gone"
-        app:banner_height="40dp" />
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/btn1"

@@ -38,11 +38,11 @@ public class ScrollBannerActivity extends AppCompatActivity {
         btn6 = (Button) findViewById(R.id.btn6);
 
         bannerDtos = new ArrayList<>();
-        bannerDtos.add(new BannerDto(1, "#FFBB33", 1, "1111111 : 5s", 1, 5000));
-        bannerDtos.add(new BannerDto(2, "#FFBB33", 2, "2222222 : 3s", 1, 3000));
-        bannerDtos.add(new BannerDto(3, "#FFBB33", 3, "3333333 : 4s", 1, 4000));
-        bannerDtos.add(new BannerDto(4, "#FFBB33", 4, "4444444 : 3s", 1, 3000));
-        bannerDtos.add(new BannerDto(5, "#FFBB33", 5, "5555555 : 5s", 1, 5000));
+        bannerDtos.add(new BannerDto(1, "#FF34B3", 1, "1111111 : 5s", 1, 5000));
+        bannerDtos.add(new BannerDto(2, "#EE6A50", 2, "2222222 : 3s", 1, 3000));
+        bannerDtos.add(new BannerDto(3, "#B3EE3A", 3, "3333333 : 4s", 1, 4000));
+        bannerDtos.add(new BannerDto(4, "#00CED1", 4, "4444444 : 3s", 1, 3000));
+        bannerDtos.add(new BannerDto(5, "#5E5E5E", 5, "5555555 : 5s", 1, 5000));
 
         bannerAdapter = new BannerAdapter(this);
         bannerAdapter.setDatas(bannerDtos);
@@ -79,6 +79,7 @@ public class ScrollBannerActivity extends AppCompatActivity {
         btn5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 scrollBanner.next();
             }
         });

@@ -7,6 +7,7 @@ import android.content.res.TypedArray;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -92,8 +93,7 @@ public class ScrollBanner extends LinearLayout {
 
     public void setAdapter(ScrollBannerAdapter adapter) {
         mAdapter = adapter;
-
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, mBannerHeight);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, mAdapter.getBannerHeight());
         if (mScrollBanners != null) {
             return;
         }
@@ -130,6 +130,17 @@ public class ScrollBanner extends LinearLayout {
             }
         });
 
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        Log.d("BANNER","默认 高度："+heightMeasureSpec);
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        if (mAdapter != null){
+            heightMeasureSpec = mAdapter.getBannerHeight();
+            Log.d("BANNER","adapter 高度："+heightMeasureSpec);
+        }
+        setMeasuredDimension(widthMeasureSpec, heightMeasureSpec);
     }
 
     public void setBannerScrollTouchListener(OnBannerScrollTouchListener listener) {

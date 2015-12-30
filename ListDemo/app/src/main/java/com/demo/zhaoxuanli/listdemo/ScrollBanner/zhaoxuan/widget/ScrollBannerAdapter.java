@@ -34,9 +34,7 @@ public abstract class ScrollBannerAdapter<T> {
         return 4000;
     }
 
-    public int bannerHeight() {
-        return mBannerHeight;
-    }
+    public abstract int getBannerHeight();
 
     public abstract int setFocusable(int position);
 }

@@ -19,10 +19,12 @@ public class BannerAdapter extends ScrollBannerAdapter<BannerDto> {
 
     private List<BannerDto> mDatas;
     private LayoutInflater mInflater;
+    private int mHeight ;
 
     public BannerAdapter(Context context) {
         super(context);
         this.mInflater = LayoutInflater.from(context);
+        mHeight = (int)context.getResources().getDimension(R.dimen.banner_width);
     }
 
     public void setDatas(List datas) {
@@ -50,6 +52,11 @@ public class BannerAdapter extends ScrollBannerAdapter<BannerDto> {
     }
 
     @Override
+    public int getBannerHeight() {
+        return mHeight;
+    }
+
+    @Override
     public View getView(int position, View convertView) {
         BannerDto bannerDto = mDatas.get(position);
         ViewHolder viewHolder = null;
@@ -64,6 +71,7 @@ public class BannerAdapter extends ScrollBannerAdapter<BannerDto> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         convertView.setBackgroundColor(Color.parseColor(bannerDto.getBgColor()));
+
         viewHolder.titleText.setText(bannerDto.getTitle());
         return convertView;
     }
