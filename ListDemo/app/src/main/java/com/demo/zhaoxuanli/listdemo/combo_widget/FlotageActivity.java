@@ -43,7 +43,7 @@ public class FlotageActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.button1:
                 TopToast.makeText(this, "漂浮式控件").showPopupWindow(button1);
                 break;
-            case R.id.button3:  noDataTip.show(button1);
+            case R.id.button3:  noDataTip.show();
                 break;
             case R.id.button4:  noDataTip.hide();
                 break;

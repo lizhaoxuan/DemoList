@@ -96,6 +96,14 @@ public class NoDataTip {
         }
     }
 
+    public void show() {
+        if (popupWindow == null) {
+            initView();
+        }
+        popupWindow.showAtLocation(activity.getWindow().getDecorView(), Gravity.CENTER, 0, 0);
+        System.out.println("111111111");
+    }
+
     public void show(View view) {
         if (popupWindow == null) {
             initView();

@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.demo.zhaoxuanli.listdemo" >
+    package="com.demo.zhaoxuanli.listdemo">
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <!-- 往sdcard中写入数据的权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- 在sdcard中创建/删除文件的权限 -->
@@ -16,10 +18,10 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -61,22 +63,24 @@
             android:name=".music_player.MusicService"
             android:enabled="true"
             android:exported="true" />
-
+        <receiver android:name="com.demo.zhaoxuanli.listdemo.quietly_weak.Checkupdate">
+            <intent-filter>
+                <action android:name="ELITOR_CLOCK" />
+            </intent-filter>
+        </receiver>
         <activity
             android:name=".db_orm.SQLiteActivity"
             android:label="@string/title_activity_sqlite"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".combo_widget.ComboActivity" />
-        <activity android:name=".combo_widget.FlotageActivity" >
-        </activity>
+        <activity android:name=".combo_widget.FlotageActivity"></activity>
         <activity
             android:name=".combo_widget.EmbedActivity"
-            android:theme="@style/NoActionBar" >
-        </activity>
-        <activity android:name=".ScrollBanner.ScrollBannerActivity" >
-        </activity>
-        <activity android:name=".teach_case.TeachCaseActivity" >
-        </activity>
+            android:theme="@style/NoActionBar"></activity>
+        <activity android:name=".ScrollBanner.ScrollBannerActivity"></activity>
+        <activity android:name=".teach_case.TeachCaseActivity"></activity>
+        <activity android:name=".quietly_weak.QuietlyWeakActivity"></activity>
     </application>
+
 
 </manifest>

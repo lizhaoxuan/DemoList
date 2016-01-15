@@ -20,6 +20,7 @@ import com.demo.zhaoxuanli.listdemo.db_orm.SQLiteActivity;
 import com.demo.zhaoxuanli.listdemo.draw_music.MusicActivity;
 import com.demo.zhaoxuanli.listdemo.gyroscope.HeartActivity;
 import com.demo.zhaoxuanli.listdemo.music_player.MusicPlayerActivity;
+import com.demo.zhaoxuanli.listdemo.quietly_weak.QuietlyWeakActivity;
 import com.demo.zhaoxuanli.listdemo.teach_case.TeachCaseActivity;
 import com.demo.zhaoxuanli.listdemo.thread_pool.ThreadPoolActivity;
 import com.demo.zhaoxuanli.listdemo.weather.WeatherActivity;
@@ -116,6 +117,8 @@ public class RecycleViewActivity extends AppCompatActivity {
                 "自动滚动banner", ScrollBannerActivity.class));
         myDatas.add(new ItemValue(10, "TeachCase",
                 "新手提示控件", TeachCaseActivity.class));
+        myDatas.add(new ItemValue(11, "偷偷唤醒",
+                "偷偷唤醒手机", QuietlyWeakActivity.class));
 
     }
 
