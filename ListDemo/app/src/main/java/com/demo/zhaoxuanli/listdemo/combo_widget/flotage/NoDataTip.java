@@ -69,6 +69,7 @@ public class NoDataTip {
         popupWindow.setFocusable(false); // 设置popupwindow可获得焦点
         popupWindow.setTouchable(false); // 设置PopupWindow可触摸
 
+
         imageView = (ImageView) popupWindow_view.findViewById(R.id.imageView);
         textView = (TextView) popupWindow_view.findViewById(R.id.textView);
         initTipsData();
