@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 
 import com.demo.zhaoxuanli.listdemo.R;
+import com.demo.zhaoxuanli.listdemo.combo_widget.widget.DynamicPlugin;
 
 import java.util.List;
 
@@ -34,6 +35,8 @@ public class NoDataTip {
 
     private ImageView imageView;
     private TextView textView;
+
+    private DynamicPlugin dynamicPlugin;
 
     /**
      * 目标数据集，通过该数据集判断是否显示
@@ -73,6 +76,8 @@ public class NoDataTip {
         imageView = (ImageView) popupWindow_view.findViewById(R.id.imageView);
         textView = (TextView) popupWindow_view.findViewById(R.id.textView);
         initTipsData();
+
+        dynamicPlugin = new DynamicPlugin(activity,popupWindow_view);
     }
 
     /**
@@ -101,7 +106,8 @@ public class NoDataTip {
         if (popupWindow == null) {
             initView();
         }
-        popupWindow.showAtLocation(activity.getWindow().getDecorView(), Gravity.CENTER, 0, 0);
+        //popupWindow.showAtLocation(activity.getWindow().getDecorView(), Gravity.CENTER, 0, 0);
+        dynamicPlugin.show(TitleHeight);
         System.out.println("111111111");
     }
 

@@ -2,9 +2,18 @@ package com.demo.zhaoxuanli.listdemo.combo_widget.widget;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.PixelFormat;
+import android.graphics.Rect;
+import android.transition.Transition;
+import android.transition.TransitionManager;
 import android.view.Gravity;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 
 /**
  * 动态插件
@@ -41,6 +50,11 @@ public class DynamicPlugin {
      */
     private boolean mLayoutInScreen;
 
+    /**
+     * View that handles event dispatch and content transitions.
+     */
+    private PopupDecorView mDecorView;
+
 
     private int mWindowLayoutType = WindowManager.LayoutParams.TYPE_APPLICATION_PANEL;
 
@@ -56,6 +70,7 @@ public class DynamicPlugin {
     public DynamicPlugin(Activity mActivity, View contentView) {
         this.mActivity = mActivity;
         mWindowManager = mActivity.getWindowManager();
+        mContentView = contentView;
     }
 
     public void show() {
@@ -65,7 +80,27 @@ public class DynamicPlugin {
         mIsShowing = true;
 
         final WindowManager.LayoutParams p = createPopupLayoutParams();
+        p.gravity = Gravity.CENTER;
+        p.x = 0;
+        p.y = 0;
+        //mDecorView = createDecorView(mContentView);
 
+        invokePopup(p);
+    }
+
+    public void show(int y) {
+        if (isShowing() || mContentView == null) {
+            return;
+        }
+        mIsShowing = true;
+
+        final WindowManager.LayoutParams p = createPopupLayoutParams();
+        p.gravity = Gravity.CENTER;
+        p.x = 50;
+        p.y = y;
+        //mDecorView = createDecorView(mContentView);
+
+        invokePopup(p);
     }
 
     private WindowManager.LayoutParams createPopupLayoutParams() {
@@ -74,12 +109,11 @@ public class DynamicPlugin {
         p.flags = computeFlags(p.flags);
         p.type = mWindowLayoutType;
         p.token = mActivity.getWindow().getDecorView().getWindowToken();
+        p.width = WindowManager.LayoutParams.WRAP_CONTENT;
+        p.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        p.format = PixelFormat.TRANSLUCENT;
         //p.windowAnimations = computeAnimationResource();
         return p;
-    }
-
-    public void show(int y) {
-
     }
 
     private int computeFlags(int curFlags) {
@@ -124,6 +158,47 @@ public class DynamicPlugin {
         return curFlags;
     }
 
+    private PopupDecorView createDecorView(View contentView) {
+        final ViewGroup.LayoutParams layoutParams = mContentView.getLayoutParams();
+        final int height;
+        if (layoutParams != null && layoutParams.height == ViewGroup.LayoutParams.WRAP_CONTENT) {
+            height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        } else {
+            height = ViewGroup.LayoutParams.MATCH_PARENT;
+        }
+
+        final PopupDecorView decorView = new PopupDecorView(mActivity);
+        decorView.addView(contentView, ViewGroup.LayoutParams.MATCH_PARENT, height);
+        decorView.setClipChildren(false);
+        decorView.setClipToPadding(false);
+
+        return decorView;
+    }
+
+    private void invokePopup(WindowManager.LayoutParams p) {
+        if (mActivity != null) {
+            p.packageName = mActivity.getPackageName();
+        }
+
+//        final PopupDecorView decorView = mDecorView;
+//        decorView.setFitsSystemWindows(false);
+
+        //setLayoutDirectionFromAnchor();
+
+        mWindowManager.addView(mContentView, p);
+
+//        if (mEnterTransition != null) {
+//            decorView.requestEnterTransition(mEnterTransition);
+//        }
+    }
+
+//    private void setLayoutDirectionFromAnchor() {
+//        View anchor = mActivity.getWindow().getDecorView();
+//        if (anchor != null) {
+//            mDecorView.setLayoutDirection(anchor.getLayoutDirection());
+//        }
+//    }
+
     public boolean isShowing() {
         return mIsShowing;
     }
@@ -152,5 +227,65 @@ public class DynamicPlugin {
         mLayoutInScreen = enabled;
     }
 
+    private class PopupDecorView extends FrameLayout {
+        //private TransitionListenerAdapter mPendingExitListener;
+
+        public PopupDecorView(Context context) {
+            super(context);
+        }
+
+        @Override
+        public boolean dispatchKeyEvent(KeyEvent event) {
+            if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+                if (getKeyDispatcherState() == null) {
+                    return super.dispatchKeyEvent(event);
+                }
+
+                if (event.getAction() == KeyEvent.ACTION_DOWN && event.getRepeatCount() == 0) {
+                    final KeyEvent.DispatcherState state = getKeyDispatcherState();
+                    if (state != null) {
+                        state.startTracking(event, this);
+                    }
+                    return true;
+                } else if (event.getAction() == KeyEvent.ACTION_UP) {
+                    final KeyEvent.DispatcherState state = getKeyDispatcherState();
+                    if (state != null && state.isTracking(event) && !event.isCanceled()) {
+                        // dismiss();
+                        return true;
+                    }
+                }
+                return super.dispatchKeyEvent(event);
+            } else {
+                return super.dispatchKeyEvent(event);
+            }
+        }
+
+        @Override
+        public boolean dispatchTouchEvent(MotionEvent ev) {
+//            if (mTouchInterceptor != null && mTouchInterceptor.onTouch(this, ev)) {
+//                return true;
+//            }
+            return super.dispatchTouchEvent(ev);
+        }
+
+        @Override
+        public boolean onTouchEvent(MotionEvent event) {
+            final int x = (int) event.getX();
+            final int y = (int) event.getY();
+
+            if ((event.getAction() == MotionEvent.ACTION_DOWN)
+                    && ((x < 0) || (x >= getWidth()) || (y < 0) || (y >= getHeight()))) {
+                //dismiss();
+                return true;
+            } else if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
+                //dismiss();
+                return true;
+            } else {
+                return super.onTouchEvent(event);
+            }
+        }
+
+
+    }
 
 }
