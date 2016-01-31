@@ -20,17 +20,16 @@ import java.util.ArrayList;
 /**
  * 层次结构
  * FrameLayout（rootView）{   //根布局
- * ToolBar
- * LinearLayout(rootView){   //内容布局
- * TopWidget     //顶部嵌入式通知消息
- * UserView    //真正用户布局内容
- * BottomWidget   //底部嵌入View
- * <p>
- * }
- * NoDataTips(match,match,gone)   //空数据提示控件
- * ErrorTips(match,match,gone)    //错误提示控件
- * ...
- * Loading(match,match,gone)      //loading
+ *      ToolBar
+ *      LinearLayout(rootView){   //内容布局
+ *          TopWidget     //顶部嵌入式通知消息
+ *          UserView    //真正用户布局内容
+ *          BottomWidget   //底部嵌入View
+ *      }
+ *      NoDataTips(match,match,gone)   //空数据提示控件
+ *      ErrorTips(match,match,gone)    //错误提示控件
+ *      ...
+ *      Loading(match,match,gone)      //loading
  * }
  * <p>
  * Tips:

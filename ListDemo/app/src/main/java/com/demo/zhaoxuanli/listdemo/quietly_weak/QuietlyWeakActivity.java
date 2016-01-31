@@ -46,13 +46,13 @@ public class QuietlyWeakActivity extends AppCompatActivity {
         mWakelock = pm.newWakeLock(PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.SCREEN_DIM_WAKE_LOCK, "target");
 
 
-//        //创建Intent对象，action为ELITOR_CLOCK，附加信息为字符串“你该打酱油了”
-//        Intent intent = new Intent("ELITOR_CLOCK");
-//        intent.putExtra("msg", "你该打酱油了");
-//        PendingIntent pi = PendingIntent.getBroadcast(this, 0, intent, 0);
-//        AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
-//        am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 10 * 1000, pi);
-//        Log.d(TAG, "发广播");
+        //创建Intent对象，action为ELITOR_CLOCK，附加信息为字符串“你该打酱油了”
+        Intent intent = new Intent("ELITOR_CLOCK");
+        intent.putExtra("msg", "你该打酱油了");
+        PendingIntent pi = PendingIntent.getBroadcast(this, 0, intent, 0);
+        AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
+        am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 10 * 1000, pi);
+        Log.d(TAG, "发广播");
 
         registerReceiver();
 
