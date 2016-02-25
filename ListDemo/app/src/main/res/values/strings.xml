@@ -15,4 +15,5 @@
     <string name="title_activity_control_thread">ControlThread</string>
     <string name="title_activity_music_player">MusicPlayerActivity</string>
     <string name="title_activity_sqlite">SQLiteActivity</string>
+    <string name="title_activity_test">TestActivity</string>
 </resources>

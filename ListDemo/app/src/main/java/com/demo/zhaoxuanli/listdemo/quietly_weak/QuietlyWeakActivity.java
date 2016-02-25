@@ -21,6 +21,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.demo.zhaoxuanli.listdemo.DemoApplication;
 import com.demo.zhaoxuanli.listdemo.R;

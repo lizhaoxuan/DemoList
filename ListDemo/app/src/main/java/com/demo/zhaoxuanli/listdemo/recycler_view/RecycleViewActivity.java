@@ -22,6 +22,7 @@ import com.demo.zhaoxuanli.listdemo.gyroscope.HeartActivity;
 import com.demo.zhaoxuanli.listdemo.music_player.MusicPlayerActivity;
 import com.demo.zhaoxuanli.listdemo.quietly_weak.QuietlyWeakActivity;
 import com.demo.zhaoxuanli.listdemo.teach_case.TeachCaseActivity;
+import com.demo.zhaoxuanli.listdemo.view_parameter.ViewParameterActivity;
 import com.demo.zhaoxuanli.listdemo.thread_pool.ThreadPoolActivity;
 import com.demo.zhaoxuanli.listdemo.weather.WeatherActivity;
 
@@ -96,6 +97,9 @@ public class RecycleViewActivity extends AppCompatActivity {
     private void initData() {
 
         myDatas = new ArrayList<>();
+        myDatas.add(new ItemValue(0, "测试",
+                "测试Activity",
+                ViewParameterActivity.class));
         myDatas.add(new ItemValue(0, "天气查询",
                 "通过HTTP访问中央气象台，根据官方API进行解析，同时根据天气状况，切换背景图片",
                 WeatherActivity.class));

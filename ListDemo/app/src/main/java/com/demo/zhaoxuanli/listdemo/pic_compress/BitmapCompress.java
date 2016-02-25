@@ -10,7 +10,7 @@ import android.graphics.BitmapFactory;
 public class BitmapCompress {
 
     /**
-     * 将图片已等比例压缩。通常用于从文件读取图片
+     * 将图片以等比例压缩。通常用于从文件读取图片
      * @param filename   图片路径名
      * @param sampleSize  压缩为1/sampleSize
      * @return
