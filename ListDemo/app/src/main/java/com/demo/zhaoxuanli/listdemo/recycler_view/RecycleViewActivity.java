@@ -17,10 +17,12 @@ import com.demo.zhaoxuanli.listdemo.ScrollBanner.ScrollBannerActivity;
 import com.demo.zhaoxuanli.listdemo.bluetooth.BlueToothActivity;
 import com.demo.zhaoxuanli.listdemo.combo_widget.ComboActivity;
 import com.demo.zhaoxuanli.listdemo.db_orm.SQLiteActivity;
+import com.demo.zhaoxuanli.listdemo.distribute.DistributeActivity;
 import com.demo.zhaoxuanli.listdemo.draw_music.MusicActivity;
 import com.demo.zhaoxuanli.listdemo.gyroscope.HeartActivity;
 import com.demo.zhaoxuanli.listdemo.music_player.MusicPlayerActivity;
 import com.demo.zhaoxuanli.listdemo.quietly_weak.QuietlyWeakActivity;
+import com.demo.zhaoxuanli.listdemo.reflection.ReflectionActivity;
 import com.demo.zhaoxuanli.listdemo.teach_case.TeachCaseActivity;
 import com.demo.zhaoxuanli.listdemo.view_parameter.ViewParameterActivity;
 import com.demo.zhaoxuanli.listdemo.thread_pool.ThreadPoolActivity;
@@ -98,8 +100,8 @@ public class RecycleViewActivity extends AppCompatActivity {
 
         myDatas = new ArrayList<>();
         myDatas.add(new ItemValue(0, "测试",
-                "测试Activity",
-                ViewParameterActivity.class));
+                "测试Activity - java 反射机制应用",
+                ReflectionActivity.class));
         myDatas.add(new ItemValue(0, "天气查询",
                 "通过HTTP访问中央气象台，根据官方API进行解析，同时根据天气状况，切换背景图片",
                 WeatherActivity.class));
@@ -123,7 +125,10 @@ public class RecycleViewActivity extends AppCompatActivity {
                 "新手提示控件", TeachCaseActivity.class));
         myDatas.add(new ItemValue(11, "偷偷唤醒",
                 "偷偷唤醒手机", QuietlyWeakActivity.class));
-
+        myDatas.add(new ItemValue(12, "java 反射机制测验",
+                "java反射的一些测试应用", ReflectionActivity.class));
+        myDatas.add(new ItemValue(13, "android 消息分发组件",
+                "android 消息分发组件Demo", DistributeActivity.class));
     }
 
 

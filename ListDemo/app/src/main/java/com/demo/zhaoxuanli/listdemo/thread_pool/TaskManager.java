@@ -28,13 +28,13 @@ public class TaskManager {
     private static final int KEEP_ALIVE_TIME = 60;
 
     // 设置时间单位
-    private static final TimeUnit KEEP_ALIVE_TIME_UNIT = TimeUnit.SECONDS;;
+    private static final TimeUnit KEEP_ALIVE_TIME_UNIT = TimeUnit.SECONDS;
 
     // 线程池的核心线程数（初始线程数）
-    private static final int CORE_POOL_SIZE = 2;
+    private static final int CORE_POOL_SIZE = 1;
 
     // 线程池的最大线程数
-    private static final int MAXIMUM_POOL_SIZE = 6;
+    private static final int MAXIMUM_POOL_SIZE = 3;
 
     //等待执行的任务队列
     private final BlockingQueue<Runnable> mTaskQueue = new PriorityBlockingQueue<Runnable>(4);;
@@ -84,7 +84,7 @@ public class TaskManager {
         mTaskThreadPool = new ThreadPoolExecutor(CORE_POOL_SIZE,
                 MAXIMUM_POOL_SIZE, KEEP_ALIVE_TIME, KEEP_ALIVE_TIME_UNIT,
                 mTaskQueue, mRejectedHandler);
-
+        ((ThreadPoolExecutor)mTaskThreadPool).setCorePoolSize(1);
         /**
          * ExecutorService 没有allowCoreThreadTimeOut 方法
          * ThreadPoolExecutor 才有

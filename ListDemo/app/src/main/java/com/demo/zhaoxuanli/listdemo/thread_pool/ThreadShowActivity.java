@@ -8,18 +8,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.demo.zhaoxuanli.listdemo.R;
 import com.demo.zhaoxuanli.listdemo.default_widget.ProgressBarItem;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.concurrent.Executors;
 
 public class ThreadShowActivity extends AppCompatActivity {
 
-    private ArrayList<ProgressBarItem> mBarList ;
+    private ArrayList<ProgressBarItem> mBarList;
     private ArrayList<MyRunnable> mRunnableList;
-    private Button mStartBtn,mStopBtn;
+    private Button mStartBtn, mStopBtn, mAddBtn;
     private TaskManager mTaskManager;
     private Handler mHandler;
 
@@ -29,8 +31,7 @@ public class ThreadShowActivity extends AppCompatActivity {
         setContentView(R.layout.activity_thread_show);
 
 
-
-        mHandler = new Handler(){
+        mHandler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 mBarList.get(msg.what).setProgressBar(msg.arg1);
@@ -41,55 +42,62 @@ public class ThreadShowActivity extends AppCompatActivity {
 
     }
 
-    private void initView(){
+    private void initView() {
 
         mBarList = new ArrayList<>();
-        mBarList.add((ProgressBarItem)findViewById(R.id.bar1));
-        mBarList.add((ProgressBarItem)findViewById(R.id.bar2));
-        mBarList.add((ProgressBarItem)findViewById(R.id.bar3));
-        mBarList.add((ProgressBarItem)findViewById(R.id.bar4));
-        mBarList.add((ProgressBarItem)findViewById(R.id.bar5));
+        mBarList.add((ProgressBarItem) findViewById(R.id.bar1));
+        mBarList.add((ProgressBarItem) findViewById(R.id.bar2));
+        mBarList.add((ProgressBarItem) findViewById(R.id.bar3));
+        mBarList.add((ProgressBarItem) findViewById(R.id.bar4));
+        mBarList.add((ProgressBarItem) findViewById(R.id.bar5));
         mBarList.add((ProgressBarItem) findViewById(R.id.bar6));
 
-        mStartBtn = (Button)findViewById(R.id.startBtn);
-        mStopBtn = (Button)findViewById(R.id.stopBtn);
+        mStartBtn = (Button) findViewById(R.id.startBtn);
+        mStopBtn = (Button) findViewById(R.id.stopBtn);
+        mAddBtn = (Button) findViewById(R.id.addBtn);
 
+        Bundle bundle = getIntent().getExtras();
+        int kind = bundle.getInt("kind");
+        mTaskManager = new TaskManager(kind);
 
         initRunnable();
-
 
 
         initEvent();
     }
 
 
-
-
-
-
-    private void initRunnable(){
+    private void initRunnable() {
         mRunnableList = new ArrayList<>();
 
-        for(int i =0 ;i<6;i++){
-            mRunnableList.add(new MyRunnable(i,"线程"+i,mHandler));
-            mBarList.get(i).setNameText("线程"+i+":");
+        for (int i = 0; i < 6; i++) {
+            mRunnableList.add(new MyRunnable(i, "线程" + i, mHandler));
+            mBarList.get(i).setNameText("线程" + i + ":");
         }
     }
 
-    private void initEvent(){
+    private void initEvent() {
         mStartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle bundle = getIntent().getExtras();
-                int kind = bundle.getInt("kind");
-                mTaskManager = new TaskManager(kind);
-                for (MyRunnable runnable:mRunnableList) {
+
+                for (MyRunnable runnable : mRunnableList) {
                     mTaskManager.executeTask(runnable);
                 }
                 mStartBtn.setEnabled(false);
                 mStopBtn.setEnabled(true);
             }
         });
+
+        mAddBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int i = new Random().nextInt(5);
+                mTaskManager.executeTask(new MyRunnable(i, "线程" + i, mHandler));
+                Toast.makeText(ThreadShowActivity.this, "i=" + i, Toast.LENGTH_SHORT).show();
+            }
+        });
+
         mStopBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,9 +107,6 @@ public class ThreadShowActivity extends AppCompatActivity {
             }
         });
     }
-
-
-
 
 
     @Override

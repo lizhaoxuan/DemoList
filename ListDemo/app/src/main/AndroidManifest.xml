@@ -86,6 +86,10 @@
             android:label="@string/title_activity_test"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
+        <activity android:name=".reflection.ReflectionActivity" >
+        </activity>
+        <activity android:name=".distribute.DistributeActivity" >
+        </activity>
     </application>
 
 </manifest>
