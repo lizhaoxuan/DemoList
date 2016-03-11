@@ -21,7 +21,7 @@ public class ReflectionActivity extends AppCompatActivity {
 
             @Override
             public void update(UserDto data) {
-                Log.e("TAG","Update UserDto 回调成功");
+                Log.e("TAG","Update Event 回调成功");
             }
         };
         IObserver<StudentDto> studentObserver = new IObserver<StudentDto>() {
@@ -32,7 +32,7 @@ public class ReflectionActivity extends AppCompatActivity {
 
             @Override
             public void update(StudentDto data) {
-                Log.e("TAG","Update StudentDto 回调成功");
+                Log.e("TAG","Update StudentEvent 回调成功");
             }
         };
 

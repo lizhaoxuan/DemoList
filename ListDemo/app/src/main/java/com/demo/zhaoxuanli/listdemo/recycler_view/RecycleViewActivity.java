@@ -100,8 +100,8 @@ public class RecycleViewActivity extends AppCompatActivity {
 
         myDatas = new ArrayList<>();
         myDatas.add(new ItemValue(0, "测试",
-                "测试Activity - java 反射机制应用",
-                ReflectionActivity.class));
+                "测试Activity - SingleTask",
+                RecycleViewActivity.class));
         myDatas.add(new ItemValue(0, "天气查询",
                 "通过HTTP访问中央气象台，根据官方API进行解析，同时根据天气状况，切换背景图片",
                 WeatherActivity.class));

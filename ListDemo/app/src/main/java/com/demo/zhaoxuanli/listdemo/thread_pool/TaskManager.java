@@ -20,10 +20,6 @@ public class TaskManager {
     public static final int CUSTOM_THREAD_POOL = 4;
 
 
-
-
-
-
     // 当线程数超过core_pool_size时，超出的线程在等待新任务时的存活时间
     private static final int KEEP_ALIVE_TIME = 60;
 
@@ -96,7 +92,7 @@ public class TaskManager {
 
     /**
      * @param task
-     *            放入线程池执行的任务
+     * 放入线程池执行的任务
      */
     public void executeTask(Runnable task) {
         mTaskThreadPool.execute(task);

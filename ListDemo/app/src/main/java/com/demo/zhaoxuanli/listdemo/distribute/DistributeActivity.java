@@ -9,8 +9,8 @@ import com.demo.zhaoxuanli.listdemo.R;
 public class DistributeActivity extends AppCompatActivity {
 
     private DistributePool distributePool;
-    private DisObserver<UserDto> userObserver;
-    private DisObserver<StudentDto> studentObserver;
+    private DisObserver<Event> userObserver;
+    private DisObserver<StudentEvent> studentObserver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,32 +20,32 @@ public class DistributeActivity extends AppCompatActivity {
         distributePool = DistributePool.getInstance();
 
         distributePool.addObserver(this);
-        //distributePool.addData(new StudentDto(18, "初二三班"));
-        distributePool.addData(new UserDto(1,"李兆轩"));
+        //distributePool.addData(new StudentEvent(18, "初二三班"));
+        distributePool.addData(new Event(1,"李兆轩"));
 
     }
 
-    public void onEventStudentThread(StudentDto data) {
-        Log.e("TAG", "StudentDto 收到消息,data:" + data.getClassName());
+    public void onEventStudentThread(StudentEvent data) {
+        Log.e("TAG", "StudentEvent 收到消息,data:" + data.getClassName());
     }
 
-    public void onEventUserThread(UserDto data) {
+    public void onEventUserThread(Event data) {
         Log.e("TAG","userObserver 收到消息，data:"+data.getName());
     }
 
 
     private void initObserver(){
-        userObserver = new DisObserver<UserDto>() {
+        userObserver = new DisObserver<Event>() {
             @Override
-            public void distributeEvent(UserDto data) {
+            public void distributeEvent(Event data) {
                 Log.e("TAG","userObserver 收到消息，data:"+data.getName());
             }
         };
 
-        studentObserver = new DisObserver<StudentDto>() {
+        studentObserver = new DisObserver<StudentEvent>() {
             @Override
-            public void distributeEvent(StudentDto data) {
-                Log.e("TAG","StudentDto 收到消息,data:"+data.getClassName());
+            public void distributeEvent(StudentEvent data) {
+                Log.e("TAG","StudentEvent 收到消息,data:"+data.getClassName());
             }
         };
 
