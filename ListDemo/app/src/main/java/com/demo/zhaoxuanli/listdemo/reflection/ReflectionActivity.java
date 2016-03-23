@@ -42,5 +42,8 @@ public class ReflectionActivity extends AppCompatActivity {
         Object sonDto = new SonDto(1,"asd");
 
         Log.e("TAG","子类类名"+sonDto.getClass().getName());
+
+        Response<StudentDto> response = new Response<>(new StudentDto(1,"test"));
+        ReflectionTools.getGeneric(response);
     }
 }
