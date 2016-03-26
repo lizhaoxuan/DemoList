@@ -13,6 +13,16 @@ public class ReflectionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reflection);
 
+
+        ReflectionTools.addObServer(this);
+
+    }
+
+    public void testOne(Response<StudentDto> response){
+
+    }
+
+    private void dispense(){
         IObserver<UserDto> userObserver = new IObserver<UserDto>() {
             @Override
             public Class getType() {
@@ -41,9 +51,8 @@ public class ReflectionActivity extends AppCompatActivity {
 
         Object sonDto = new SonDto(1,"asd");
 
-        Log.e("TAG","子类类名"+sonDto.getClass().getName());
+        Log.e("TAG", "子类类名" + sonDto.getClass().getName());
 
-        Response<StudentDto> response = new Response<>(new StudentDto(1,"test"));
-        ReflectionTools.getGeneric(response);
+
     }
 }
