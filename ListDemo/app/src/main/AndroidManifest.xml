@@ -29,8 +29,8 @@
         </activity>
         <activity
             android:name=".recycler_view.RecycleViewActivity"
-            android:launchMode="singleTask"
-            android:label="@string/title_activity_recycle_view" />
+            android:label="@string/title_activity_recycle_view"
+            android:launchMode="singleTask" />
         <activity
             android:name=".bluetooth.BlueToothActivity"
             android:label="@string/title_activity_blue_tooth" />
@@ -90,6 +90,10 @@
         <activity android:name=".reflection.ReflectionActivity" >
         </activity>
         <activity android:name=".distribute.DistributeActivity" >
+        </activity>
+        <activity android:name=".focus_divert.FocusDivertActivity" >
+        </activity>
+        <activity android:name=".view_move.ViewMoveActivity" >
         </activity>
     </application>
 
