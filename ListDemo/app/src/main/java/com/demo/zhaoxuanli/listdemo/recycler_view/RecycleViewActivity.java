@@ -25,6 +25,7 @@ import com.demo.zhaoxuanli.listdemo.music_player.MusicPlayerActivity;
 import com.demo.zhaoxuanli.listdemo.quietly_weak.QuietlyWeakActivity;
 import com.demo.zhaoxuanli.listdemo.reflection.ReflectionActivity;
 import com.demo.zhaoxuanli.listdemo.teach_case.TeachCaseActivity;
+import com.demo.zhaoxuanli.listdemo.view_move.ViewMoveActivity;
 import com.demo.zhaoxuanli.listdemo.view_parameter.ViewParameterActivity;
 import com.demo.zhaoxuanli.listdemo.thread_pool.ThreadPoolActivity;
 import com.demo.zhaoxuanli.listdemo.weather.WeatherActivity;
@@ -100,9 +101,8 @@ public class RecycleViewActivity extends AppCompatActivity {
     private void initData() {
 
         myDatas = new ArrayList<>();
-        myDatas.add(new ItemValue(0, "测试",
-                "焦点转移",
-                FocusDivertActivity.class));
+        myDatas.add(new ItemValue(0, "拖动按钮",
+                "拖动按钮移动", ViewMoveActivity.class));
         myDatas.add(new ItemValue(0, "天气查询",
                 "通过HTTP访问中央气象台，根据官方API进行解析，同时根据天气状况，切换背景图片",
                 WeatherActivity.class));
@@ -130,8 +130,10 @@ public class RecycleViewActivity extends AppCompatActivity {
                 "java反射的一些测试应用", ReflectionActivity.class));
         myDatas.add(new ItemValue(13, "android 消息分发组件",
                 "android 消息分发组件Demo", DistributeActivity.class));
-        myDatas.add(new ItemValue(13, "焦点转移",
+        myDatas.add(new ItemValue(14, "焦点转移",
                 "用于焦点转移测试", FocusDivertActivity.class));
+        myDatas.add(new ItemValue(15, "拖动按钮",
+                "拖动按钮移动", ViewMoveActivity.class));
     }
 
 
