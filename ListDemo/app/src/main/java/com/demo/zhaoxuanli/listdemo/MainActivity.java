@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.demo.zhaoxuanli.listdemo.recycler_view.RecycleViewActivity;
+import com.demo.zhaoxuanli.listdemo.tool.ViewServer;
 
 
 /**
@@ -49,12 +50,25 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ViewServer.get(this).addWindow(this);
         setContentView(R.layout.activity_main);
 
         Intent in = new Intent(this, RecycleViewActivity.class);
         startActivity(in);
         finish();
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ViewServer.get(this).setFocusedWindow(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ViewServer.get(this).removeWindow(this);
     }
 
     @Override
