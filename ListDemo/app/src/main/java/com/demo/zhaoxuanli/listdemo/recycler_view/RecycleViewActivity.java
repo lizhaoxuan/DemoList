@@ -8,10 +8,12 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.demo.zhaoxuanli.listdemo.DemoApplication;
 import com.demo.zhaoxuanli.listdemo.R;
 import com.demo.zhaoxuanli.listdemo.ScrollBanner.ScrollBannerActivity;
 import com.demo.zhaoxuanli.listdemo.bluetooth.BlueToothActivity;
@@ -25,6 +27,7 @@ import com.demo.zhaoxuanli.listdemo.music_player.MusicPlayerActivity;
 import com.demo.zhaoxuanli.listdemo.quietly_weak.QuietlyWeakActivity;
 import com.demo.zhaoxuanli.listdemo.reflection.ReflectionActivity;
 import com.demo.zhaoxuanli.listdemo.teach_case.TeachCaseActivity;
+import com.demo.zhaoxuanli.listdemo.tool.ToolBox;
 import com.demo.zhaoxuanli.listdemo.view_move.ViewMoveActivity;
 import com.demo.zhaoxuanli.listdemo.view_parameter.ViewParameterActivity;
 import com.demo.zhaoxuanli.listdemo.thread_pool.ThreadPoolActivity;
@@ -59,6 +62,8 @@ public class RecycleViewActivity extends AppCompatActivity {
             }
         };
 
+        Log.e("TAG", "是否已root:" + ToolBox.haveRoot());
+
     }
 
     private void initView() {
@@ -76,7 +81,7 @@ public class RecycleViewActivity extends AppCompatActivity {
         myAdapter.setItemClickListener(new MyAdapter.ItemClickListener() {
             @Override
             public void onItemClick(View view, int postion) {
-                startActivity(new Intent(RecycleViewActivity.this, myDatas.get(postion).getClass_t()));
+                startActivity(new Intent(DemoApplication.getInstance(), myDatas.get(postion).getClass_t()));
             }
         });
 
