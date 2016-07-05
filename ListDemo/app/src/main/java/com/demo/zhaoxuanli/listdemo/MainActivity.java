@@ -9,6 +9,7 @@ import android.view.MenuItem;
 
 import com.demo.zhaoxuanli.listdemo.recycler_view.RecycleViewActivity;
 import com.demo.zhaoxuanli.listdemo.tool.ViewServer;
+//import com.example.annotation.PrintMe;
 
 
 /**
@@ -47,6 +48,7 @@ import com.demo.zhaoxuanli.listdemo.tool.ViewServer;
  */
 public class MainActivity extends AppCompatActivity {
 
+//    @PrintMe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

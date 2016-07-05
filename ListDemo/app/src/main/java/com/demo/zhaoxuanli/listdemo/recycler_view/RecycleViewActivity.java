@@ -69,7 +69,7 @@ public class RecycleViewActivity extends AppCompatActivity {
     private void initView() {
         myAdapter = new MyAdapter(this, myDatas);
         myRecycleView = (RecyclerView) findViewById(R.id.recyclerView);
-        myRecycleView.setLayoutManager(new LinearLayoutManager(this));
+        myRecycleView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,true));
         myRecycleView.setAdapter(myAdapter);
         refreshLayout = (SwipeRefreshLayout) findViewById(R.id.refreshLayout);
         refreshLayout.setColorSchemeResources(android.R.color.holo_purple, android.R.color.holo_blue_bright, android.R.color.holo_orange_light,

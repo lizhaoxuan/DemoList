@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.demo.zhaoxuanli.listdemo" >
+    package="com.demo.zhaoxuanli.listdemo">
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
@@ -17,10 +17,10 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -64,7 +64,7 @@
             android:enabled="true"
             android:exported="true" />
 
-        <receiver android:name=".quietly_weak.Checkupdate" >
+        <receiver android:name=".quietly_weak.Checkupdate">
             <intent-filter>
                 <action android:name="ELITOR_CLOCK" />
             </intent-filter>
@@ -85,16 +85,16 @@
         <activity
             android:name=".view_parameter.ViewParameterActivity"
             android:label="@string/title_activity_test"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
-        <activity android:name=".reflection.ReflectionActivity" >
-        </activity>
-        <activity android:name=".distribute.DistributeActivity" >
-        </activity>
-        <activity android:name=".focus_divert.FocusDivertActivity" >
-        </activity>
-        <activity android:name=".view_move.ViewMoveActivity" >
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".reflection.ReflectionActivity" />
+        <activity android:name=".distribute.DistributeActivity" />
+        <activity android:name=".focus_divert.FocusDivertActivity" />
+        <activity android:name=".view_move.ViewMoveActivity" />
+        <activity
+            android:name=".weather.Main2Activity"
+            android:label="@string/title_activity_main2"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".tradition_db.TraditionDbActivity"></activity>
     </application>
 
 </manifest>

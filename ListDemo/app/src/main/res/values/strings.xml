@@ -16,4 +16,5 @@
     <string name="title_activity_music_player">MusicPlayerActivity</string>
     <string name="title_activity_sqlite">SQLiteActivity</string>
     <string name="title_activity_test">TestActivity</string>
+    <string name="title_activity_main2">Main2Activity</string>
 </resources>
