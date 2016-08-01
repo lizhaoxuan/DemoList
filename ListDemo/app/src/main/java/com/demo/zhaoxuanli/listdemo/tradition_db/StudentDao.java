@@ -19,6 +19,7 @@ public class StudentDao {
         String constraint = ifNotExists ? "IF NOT EXISTS " : "";
         return "CREATE TABLE " + constraint + "\"STUDENT\" (" +
                 "CAKEDAO_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "CLASSES_ID INTEGER," +
                 "NAME TEXT," +
                 "BIRTHDAY INTEGER," +
                 "IS_SUCCESS INTEGER);";
@@ -71,7 +72,7 @@ public class StudentDao {
     }
 
     public long insert(Student value) {
-        String sql = "INSERT INTO STUDENT(NAME,BIRTHDAY,IS_SUCCESS) VALUES(?)";
+        String sql = "INSERT INTO STUDENT(NAME,BIRTHDAY,IS_SUCCESS) VALUES(?,?,?)";
         SQLiteStatement statement = db.compileStatement(sql);
         statement.bindString(1, value.name);
         statement.bindLong(2, value.birthday.getTime());
@@ -84,7 +85,7 @@ public class StudentDao {
         db.beginTransaction();
         for (int i = 0, l = values.length; i < l; i++) {
             Student value = values[i];
-            String sql = "INSERT INTO STUDENT(NAME,BIRTHDAY,IS_SUCCESS) VALUES(?)";
+            String sql = "INSERT INTO STUDENT(NAME,BIRTHDAY,IS_SUCCESS) VALUES(?,?,?)";
             SQLiteStatement statement = db.compileStatement(sql);
             statement.bindString(1, value.name);
             statement.bindLong(2, value.birthday.getTime());
@@ -110,6 +111,14 @@ public class StudentDao {
         contentValues.put("BIRTHDAY", value.birthday.getTime());
         contentValues.put("IS_SUCCESS", value.isSuccess ? 1L : 0L);
         return db.update("STUDENT", contentValues, "CAKEDAO_ID = " + value.id, null);
+    }
+
+    public long update(Student value,String whereClause, String[] whereArgs) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("NAME", value.name);
+        contentValues.put("BIRTHDAY", value.birthday.getTime());
+        contentValues.put("IS_SUCCESS", value.isSuccess ? 1L : 0L);
+        return db.update("STUDENT", contentValues,whereClause,whereArgs);
     }
 
     public long[] update(Student[] values) {
