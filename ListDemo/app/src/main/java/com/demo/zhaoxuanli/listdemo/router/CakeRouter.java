@@ -1,12 +1,37 @@
 package com.demo.zhaoxuanli.listdemo.router;
 
+import android.app.Activity;
+import android.app.Application;
+import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by lizhaoxuan on 16/9/22.
  */
 public class CakeRouter {
     public static final String TAG = CakeRouter.class.getSimpleName();
 
-    private static volatile CakeRouter instance;
+    private static CakeRouter instance;
+
+    private static CakeRouter init(String domain) {
+        instance = new CakeRouter(domain);
+        return instance;
+    }
+
+    public static CakeRouter getInstance() {
+        if (instance == null) {
+            throw new NullPointerException("CakeRouter must be init from Builder");
+        }
+        return instance;
+    }
+
+    private CakeRouter(String domain) {
+        this.domain = domain;
+    }
 
     /**
      * 域名头 例如：eleme
@@ -27,17 +52,120 @@ public class CakeRouter {
     private String[] whiteList;
 
     /**
-     * Android activity 类名
+     * 是否是严格模式
+     * 严格模式将对url格式严格判断,对格式不符合的url 抛出异常
+     * 非严格模式下，将会忽略部分不合格的参数,依然会尝试启动页面
+     * true 严格模式  false 非严格模式，默认false
      */
-    private String activityName;
+    private boolean strictModel;
 
     /**
-     * IOS Controller 名
+     * 页面名
+     * 若有多个，将依次尝试跳转，若有多条均符合，android默认跳转第一个.
      */
-    private String controllerName;
+    private String[] pageName;
+
+    private List<Extra> extraList;
 
 
-    public String getDomain() {
+    String getDomain() {
         return domain;
+    }
+
+    void setPageName(String... pageName) {
+        this.pageName = pageName;
+    }
+
+    boolean getStrictModel() {
+        return strictModel;
+    }
+
+    void addExtra(Extra extra) {
+        if (extraList == null) {
+            extraList = new ArrayList<>();
+        }
+        extraList.add(extra);
+    }
+
+    public Intent createIntent(Context context, String url) throws RouterException {
+        Finder finder = new Finder(this);
+        finder.finderUrl(url);
+
+        Intent intent = new Intent();
+        Class clazz = null;
+        for (String page : pageName) {
+            try {
+                clazz = Class.forName(page);
+                if (clazz.isAssignableFrom(Activity.class)) {
+                    intent.setClass(context, clazz);
+                    break;
+                } else {
+                    clazz = null;
+                }
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        if (clazz == null) {
+            Log.d(TAG, "page not found or is not Activity");
+            return null;
+        } else {
+            if (extraList != null) {
+                for (Extra extra : extraList) {
+                    extra.putExtra(intent);
+                }
+            }
+        }
+
+        if (context instanceof Application) {
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
+
+        return intent;
+    }
+
+    public boolean dispatch(Context context, String url) {
+        Intent intent = null;
+        try {
+            intent = createIntent(context, url);
+        } catch (RouterException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        if (intent == null) {
+            return false;
+        }
+        context.startActivity(intent);
+        return true;
+    }
+
+
+    public static class Builder {
+        private CakeRouter cakeRouter;
+
+        public Builder(String domain) {
+            cakeRouter = CakeRouter.init(domain);
+        }
+
+        public Builder setBlackList(String... blackList) {
+            cakeRouter.blackList = blackList;
+            return this;
+        }
+
+        public Builder setWhiteList(String... whiteList) {
+            cakeRouter.whiteList = whiteList;
+            return this;
+        }
+
+        public Builder setStrictModel(boolean strictModel) {
+            cakeRouter.strictModel = strictModel;
+            return this;
+        }
+
+        public CakeRouter build() {
+            return cakeRouter;
+        }
+
     }
 }
