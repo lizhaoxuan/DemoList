@@ -12,12 +12,22 @@ import java.net.URLEncoder;
 
 public class RouterActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_router);
 
+        CakeRouter cakeRouter = new CakeRouter.Builder("eleme")
+                .build();
 
+        String url = "eleme://com.demo.zhaoxuanli.listdemo.router.RouterTestActivity?str=abcdefg&int@i=10&char@c=p";
+        cakeRouter.dispatch(this, url);
+
+    }
+
+
+    private void test() {
         String str = "eleme://a=me.ele.crowdsource.view&login.LoginActivity";
         Log.d("TAG", "index:" + str.indexOf("://"));
         Log.d("TAG", "aaa:" + str.substring(0, 5));

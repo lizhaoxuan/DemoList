@@ -68,7 +68,7 @@ public enum Type {
     STRING {
         @Override
         public void putExtra(Intent intent, String key, String value) throws RouterException {
-            intent.putExtra(key, Double.valueOf(value));
+            intent.putExtra(key, value);
         }
     };
 

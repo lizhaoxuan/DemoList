@@ -67,14 +67,15 @@ public class Finder {
             throw new RouterException("must be have pageName! url = " + url);
         }
         url = url.substring(start);
-        start = url.indexOf("?");
-        if (start == -1) {
+        int end = url.indexOf("?");
+        if (end == -1) {
             cakeRouter.setPageName(url);
         } else {
+            url = url.substring(0, end);
             cakeRouter.setPageName(url.split("&"));
-            start += 1;
+            end += 1;
         }
-        return start;
+        return start + end;
     }
 
     /**
@@ -99,13 +100,13 @@ public class Finder {
             }
             if (typeIndex == -1) {
                 //默认String
-                key = url.substring(0, valueIndex);
+                key = entityStr.substring(0, valueIndex);
                 type = Type.STRING_KEY;
-                value = url.substring(valueIndex + 1);
+                value = entityStr.substring(valueIndex + 1);
             } else {
-                key = url.substring(0, typeIndex);
-                type = url.substring(typeIndex + 1, valueIndex);
-                value = url.substring(valueIndex + 1);
+                key = entityStr.substring(0, typeIndex);
+                type = entityStr.substring(typeIndex + 1, valueIndex);
+                value = entityStr.substring(valueIndex + 1);
             }
 
             cakeRouter.addExtra(new Extra(key, type, value));

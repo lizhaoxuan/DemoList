@@ -7,12 +7,21 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.demo.zhaoxuanli.listdemo.router.RouterActivity">
+    tools:context="com.demo.zhaoxuanli.listdemo.router.RouterTestActivity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:textSize="18sp"
+        android:text="Router test Activity"/>
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="routeActivity" />
+        android:textSize="18sp"/>
+
 
 </RelativeLayout>

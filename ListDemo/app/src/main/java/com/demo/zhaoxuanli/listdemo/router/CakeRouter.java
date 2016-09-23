@@ -1,6 +1,5 @@
 package com.demo.zhaoxuanli.listdemo.router;
 
-import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
@@ -96,20 +95,15 @@ public class CakeRouter {
         for (String page : pageName) {
             try {
                 clazz = Class.forName(page);
-                if (clazz.isAssignableFrom(Activity.class)) {
-                    intent.setClass(context, clazz);
-                    break;
-                } else {
-                    clazz = null;
-                }
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
         }
         if (clazz == null) {
-            Log.d(TAG, "page not found or is not Activity");
+            Log.w(TAG, "page not found or is not Activity" + pageName);
             return null;
         } else {
+            intent.setClass(context, clazz);
             if (extraList != null) {
                 for (Extra extra : extraList) {
                     extra.putExtra(intent);
