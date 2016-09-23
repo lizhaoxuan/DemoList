@@ -33,7 +33,8 @@
             android:launchMode="singleTask" />
         <activity
             android:name=".bluetooth.BlueToothActivity"
-            android:label="@string/title_activity_blue_tooth" />
+            android:label="@string/title_activity_blue_tooth"
+            android:theme="@style/NoAnimationTheme" />
         <activity
             android:name=".bluetooth.BWelcomeActivity"
             android:label="@string/title_activity_bwelcome" />
@@ -94,7 +95,9 @@
             android:name=".weather.Main2Activity"
             android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".tradition_db.TraditionDbActivity"></activity>
+        <activity android:name=".tradition_db.TraditionDbActivity" />
+        <activity android:name=".test.MergeRequestActivity" />
+        <activity android:name=".router.RouterActivity"></activity>
     </application>
 
 </manifest>

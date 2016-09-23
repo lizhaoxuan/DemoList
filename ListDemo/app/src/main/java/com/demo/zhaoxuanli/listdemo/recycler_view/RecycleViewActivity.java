@@ -8,7 +8,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,11 +25,11 @@ import com.demo.zhaoxuanli.listdemo.gyroscope.HeartActivity;
 import com.demo.zhaoxuanli.listdemo.music_player.MusicPlayerActivity;
 import com.demo.zhaoxuanli.listdemo.quietly_weak.QuietlyWeakActivity;
 import com.demo.zhaoxuanli.listdemo.reflection.ReflectionActivity;
+import com.demo.zhaoxuanli.listdemo.router.RouterActivity;
 import com.demo.zhaoxuanli.listdemo.teach_case.TeachCaseActivity;
-import com.demo.zhaoxuanli.listdemo.tool.ToolBox;
-import com.demo.zhaoxuanli.listdemo.view_move.ViewMoveActivity;
-import com.demo.zhaoxuanli.listdemo.view_parameter.ViewParameterActivity;
+import com.demo.zhaoxuanli.listdemo.test.MergeRequestActivity;
 import com.demo.zhaoxuanli.listdemo.thread_pool.ThreadPoolActivity;
+import com.demo.zhaoxuanli.listdemo.view_move.ViewMoveActivity;
 import com.demo.zhaoxuanli.listdemo.weather.WeatherActivity;
 
 import java.util.ArrayList;
@@ -61,15 +60,12 @@ public class RecycleViewActivity extends AppCompatActivity {
 
             }
         };
-
-        Log.e("TAG", "是否已root:" + ToolBox.haveRoot());
-
     }
 
     private void initView() {
         myAdapter = new MyAdapter(this, myDatas);
         myRecycleView = (RecyclerView) findViewById(R.id.recyclerView);
-        myRecycleView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,true));
+        myRecycleView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true));
         myRecycleView.setAdapter(myAdapter);
         refreshLayout = (SwipeRefreshLayout) findViewById(R.id.refreshLayout);
         refreshLayout.setColorSchemeResources(android.R.color.holo_purple, android.R.color.holo_blue_bright, android.R.color.holo_orange_light,
@@ -106,6 +102,10 @@ public class RecycleViewActivity extends AppCompatActivity {
     private void initData() {
 
         myDatas = new ArrayList<>();
+        myDatas.add(new ItemValue(0, "Router",
+                "通过Url启动activity", RouterActivity.class));
+        myDatas.add(new ItemValue(0, "mergeRequst",
+                "合并请求", MergeRequestActivity.class));
         myDatas.add(new ItemValue(0, "拖动按钮",
                 "拖动按钮移动", ViewMoveActivity.class));
         myDatas.add(new ItemValue(0, "天气查询",
