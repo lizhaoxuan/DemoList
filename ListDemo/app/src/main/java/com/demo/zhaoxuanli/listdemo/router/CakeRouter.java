@@ -76,7 +76,16 @@ public class CakeRouter {
         this.pageName = new String[length];
         for (int i = 0; i < length; i++) {
             try {
-                this.pageName[i] = Tool.decode(pageName[i]);
+                if (checkBlackList(this.pageName[i])) {
+                    if (checkwhiteList(this.pageName[i])) {
+                        this.pageName[i] = Tool.decode(pageName[i]);
+                    } else {
+                        break;
+                    }
+                } else {
+                    this.pageName[i] = Tool.decode(pageName[i]);
+                }
+
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
@@ -145,6 +154,28 @@ public class CakeRouter {
         }
         context.startActivity(intent);
         return true;
+    }
+
+    private boolean checkBlackList(String pageName) {
+        if (blackList != null) {
+            for (String name : blackList) {
+                if (pageName.equals(name)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean checkwhiteList(String pageName) {
+        if (whiteList != null) {
+            for (String name : whiteList) {
+                if (pageName.equals(name)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 
