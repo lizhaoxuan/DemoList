@@ -21,8 +21,9 @@ public class RouterActivity extends AppCompatActivity {
         CakeRouter cakeRouter = new CakeRouter.Builder("eleme")
                 .build();
 
-        String url = "eleme://com.demo.zhaoxuanli.listdemo.router.RouterTestActivity?str=abcdefg&int@i=10&char@c=p";
-        cakeRouter.dispatch(this, url);
+        test();
+//        String url = "eleme://com.demo.zhaoxuanli.listdemo.router.RouterTestActivity?str=abcdefg&int@i=10&char@c=p";
+//        cakeRouter.dispatch(this, url);
 
     }
 

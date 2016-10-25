@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,13 +67,20 @@ public class CakeRouter {
 
     private List<Extra> extraList;
 
-
     String getDomain() {
         return domain;
     }
 
     void setPageName(String... pageName) {
-        this.pageName = pageName;
+        int length = pageName.length;
+        this.pageName = new String[length];
+        for (int i = 0; i < length; i++) {
+            try {
+                this.pageName[i] = Tool.decode(pageName[i]);
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     boolean getStrictModel() {
@@ -95,6 +103,7 @@ public class CakeRouter {
         for (String page : pageName) {
             try {
                 clazz = Class.forName(page);
+                break;
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
@@ -106,7 +115,11 @@ public class CakeRouter {
             intent.setClass(context, clazz);
             if (extraList != null) {
                 for (Extra extra : extraList) {
-                    extra.putExtra(intent);
+                    try {
+                        extra.putExtra(intent);
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }
