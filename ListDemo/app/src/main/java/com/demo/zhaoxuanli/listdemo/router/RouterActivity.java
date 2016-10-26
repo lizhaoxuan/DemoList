@@ -20,7 +20,6 @@ public class RouterActivity extends AppCompatActivity {
 
         CakeRouter cakeRouter = new CakeRouter.Builder("eleme")
                 .build();
-
         test();
 //        String url = "eleme://com.demo.zhaoxuanli.listdemo.router.RouterTestActivity?str=abcdefg&int@i=10&char@c=p";
 //        cakeRouter.dispatch(this, url);
@@ -29,7 +28,7 @@ public class RouterActivity extends AppCompatActivity {
 
 
     private void test() {
-        String str = "eleme://a=me.ele.crowdsource.view&login.LoginActivity";
+        String str = "eleme://a=me.ele.crowdsource.view&login.LoginActivity?key@i[]=[1,2,3,4]";
         Log.d("TAG", "index:" + str.indexOf("://"));
         Log.d("TAG", "aaa:" + str.substring(0, 5));
         Log.d("TAG", "bbb:" + str.substring(8));

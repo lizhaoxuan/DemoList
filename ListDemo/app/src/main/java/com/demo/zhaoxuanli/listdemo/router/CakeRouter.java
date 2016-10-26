@@ -206,4 +206,118 @@ public class CakeRouter {
         }
 
     }
+
+    public static class Schema {
+        private String domain;
+        private String[] pageNames;
+        private ArrayList<String> parameters;
+
+        public Schema(String domain, String... pageNames) {
+            this.domain = domain;
+            this.pageNames = pageNames;
+        }
+
+        public Schema putExtar(String key, int value) throws UnsupportedEncodingException {
+            addParameter(key, "i", String.valueOf(value));
+            return this;
+        }
+
+        public Schema putExtar(String key, int[] value) throws UnsupportedEncodingException {
+            addParameter(key, "i[]", Tool.toJson(value));
+            return this;
+        }
+
+        public Schema putExtar(String key, long value) throws UnsupportedEncodingException {
+            addParameter(key, "l", String.valueOf(value));
+            return this;
+        }
+
+        public Schema putExtar(String key, long[] value) throws UnsupportedEncodingException {
+            addParameter(key, "l[]", Tool.toJson(value));
+            return this;
+        }
+
+        public Schema putExtar(String key, short value) throws UnsupportedEncodingException {
+            addParameter(key, "s", String.valueOf(value));
+            return this;
+        }
+
+        public Schema putExtar(String key, short[] value) throws UnsupportedEncodingException {
+            addParameter(key, "s[]", Tool.toJson(value));
+            return this;
+        }
+
+        public Schema putExtar(String key, float value) throws UnsupportedEncodingException {
+            addParameter(key, "f", String.valueOf(value));
+            return this;
+        }
+
+        public Schema putExtar(String key, float[] value) throws UnsupportedEncodingException {
+            addParameter(key, "f[]", Tool.toJson(value));
+            return this;
+        }
+
+        public Schema putExtar(String key, double value) throws UnsupportedEncodingException {
+            addParameter(key, "d", String.valueOf(value));
+            return this;
+        }
+
+        public Schema putExtar(String key, double[] value) throws UnsupportedEncodingException {
+            addParameter(key, "d[]", Tool.toJson(value));
+            return this;
+        }
+
+        public Schema putExtar(String key, byte value) throws UnsupportedEncodingException {
+            addParameter(key, "bt", String.valueOf(value));
+            return this;
+        }
+
+        public Schema putExtar(String key, byte[] value) throws UnsupportedEncodingException {
+            addParameter(key, "bt[]", Tool.toJson(value));
+            return this;
+        }
+
+        public Schema putExtar(String key, char value) throws UnsupportedEncodingException {
+            addParameter(key, "c", String.valueOf(value));
+            return this;
+        }
+
+        public Schema putExtar(String key, char[] value) throws UnsupportedEncodingException {
+            StringBuilder builder = new StringBuilder();
+            for (char c : value) {
+                builder.append(c);
+            }
+            addParameter(key, "c[]", builder.toString());
+            return this;
+        }
+
+        public Schema putExtar(String key, String value) throws UnsupportedEncodingException {
+            addParameter(key, "str", String.valueOf(value));
+            return this;
+        }
+
+        public Schema putExtar(String key, String[] value) throws UnsupportedEncodingException {
+            addParameter(key, "str[]", Tool.toJson(value));
+            return this;
+        }
+
+        public <T> Schema putExtar(String key, Class<T> clazz, T value) throws UnsupportedEncodingException {
+            addParameter(key, clazz.getCanonicalName(), Tool.toJson(value));
+            return this;
+        }
+
+        public void addParameter(String key, String valueType, String value) throws UnsupportedEncodingException {
+            if (parameters == null) {
+                parameters = new ArrayList<>();
+            }
+            String builder = Tool.decode(key) +
+                    "@" +
+                    Tool.decode(valueType) +
+                    "=" +
+                    Tool.decode(value);
+            parameters.add(builder);
+        }
+
+
+    }
 }
