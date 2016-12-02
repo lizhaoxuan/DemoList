@@ -98,7 +98,7 @@
         <activity android:name=".tradition_db.TraditionDbActivity" />
         <activity android:name=".test.MergeRequestActivity" />
         <activity android:name=".router.RouterActivity" />
-        <activity android:name=".router.RouterTestActivity"></activity>
+        <activity android:name=".router.RouterTestActivity"/>
     </application>
 
 </manifest>

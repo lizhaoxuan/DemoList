@@ -8,6 +8,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,6 +32,7 @@ import com.demo.zhaoxuanli.listdemo.test.MergeRequestActivity;
 import com.demo.zhaoxuanli.listdemo.thread_pool.ThreadPoolActivity;
 import com.demo.zhaoxuanli.listdemo.view_move.ViewMoveActivity;
 import com.demo.zhaoxuanli.listdemo.weather.WeatherActivity;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +62,32 @@ public class RecycleViewActivity extends AppCompatActivity {
 
             }
         };
+
+        test();
+    }
+
+    private void test() {
+        String json = "{\n" +
+                "\"is_cover\":1,\n" +
+                "\"health\":[\n" +
+                "{\n" +
+                "\"name\":\"ss\"\n" +
+                "},\n" +
+                "{\n" +
+                "\"name\":\"11\"\n" +
+                "}\n" +
+                "]\n" +
+                "}";
+        Test ttt = new Gson().fromJson(json, Test.class);
+        Log.d("TAG", "lalalalnnn: iscover:" + ttt.is_cover + ttt.name);
+    }
+
+    class Test {
+
+        private int is_cover;
+        private String name;
+        private String sex;
+
     }
 
     private void initView() {
@@ -88,7 +116,6 @@ public class RecycleViewActivity extends AppCompatActivity {
                 mHandler.sendEmptyMessageDelayed(0, 2000);
             }
         });
-
 
     }
 
