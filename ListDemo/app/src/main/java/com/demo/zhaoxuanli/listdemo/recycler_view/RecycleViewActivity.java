@@ -30,6 +30,7 @@ import com.demo.zhaoxuanli.listdemo.router.RouterActivity;
 import com.demo.zhaoxuanli.listdemo.teach_case.TeachCaseActivity;
 import com.demo.zhaoxuanli.listdemo.test.MergeRequestActivity;
 import com.demo.zhaoxuanli.listdemo.thread_pool.ThreadPoolActivity;
+import com.demo.zhaoxuanli.listdemo.tool.ToolBox;
 import com.demo.zhaoxuanli.listdemo.view_move.ViewMoveActivity;
 import com.demo.zhaoxuanli.listdemo.weather.WeatherActivity;
 import com.google.gson.Gson;
@@ -50,6 +51,17 @@ public class RecycleViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycle_view);
+
+
+        Log.d("TAG", "实际位置距离:" + ToolBox.getTowPointDistance(121.3710720000, 31.3459950000
+                , 121.372291,31.344616));
+
+        Log.d("TAG", "经纬度距离:" + ToolBox.getTowPointDistance(121.3710720000, 31.3459950000
+                , 121.3572840000,31.3627170000));
+
+//        Log.d("TAG", "距离:" + ToolBox.getTowPointDistance(31.3101230000, 121.4963010000
+//                , 31.3203469510, 121.5013872613));
+
 
         initData();
         initView();

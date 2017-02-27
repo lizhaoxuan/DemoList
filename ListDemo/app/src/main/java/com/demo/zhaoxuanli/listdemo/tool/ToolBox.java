@@ -1,32 +1,47 @@
 package com.demo.zhaoxuanli.listdemo.tool;
 
+import android.content.Context;
+import android.os.Environment;
+import android.widget.Toast;
+
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.util.Scanner;
 
-
-import android.content.Context;
-import android.os.Environment;
-import android.widget.Toast;
 /**
  * Created by zhaoxuan.li on 2015/10/14.
  */
 public class ToolBox {
+    private static final double EARTH_RADIUS = 6378137;
 
 
+    public static double getTowPointDistance(double lng1, double lat1, double lng2, double lat2) {
+        double radLat1 = rad(lat1);
+        double radLat2 = rad(lat2);
+        double a = radLat1 - radLat2;
+        double b = rad(lng1) - rad(lng2);
+        double s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2)
+                + Math.cos(radLat1) * Math.cos(radLat2) * Math.pow(Math.sin(b / 2), 2)));
+        s = s * EARTH_RADIUS;
+        s = Math.round(s * 10000) / 10000;
+        return s;
+    }
+
+    private static double rad(double d) {
+        return d * Math.PI / 180.0;
+    }
 
     //向文件中写入数据		   文件名，文件夹名，字符串
-    public boolean writeFile (String FILENAME,String DIR,String DATA){
-        DIR="Light_Cube/"+DIR;
+    public boolean writeFile(String FILENAME, String DIR, String DATA) {
+        DIR = "Light_Cube/" + DIR;
 
-        if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             File file = new File(Environment.getExternalStorageDirectory()
                     + File.separator + DIR + File.separator + FILENAME); // 定义要操作的文件
             if (!file.getParentFile().exists()) {
@@ -48,22 +63,23 @@ public class ToolBox {
             return false;
         }
     }
+
     //从文件中读取数据	文件名，文件夹名
-    public String  readFile (String FILENAME,String DIR){
-        DIR="Light_Cube/"+DIR;
-        String DATA="";
-        if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+    public String readFile(String FILENAME, String DIR) {
+        DIR = "Light_Cube/" + DIR;
+        String DATA = "";
+        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             File file = new File(Environment.getExternalStorageDirectory()
                     + File.separator + DIR + File.separator + FILENAME); // 定义要操作的文件
             if (!file.getParentFile().exists()) {
                 file.getParentFile().mkdirs(); // 创建父文件夹路径
                 return DATA;
             }
-            Scanner scan = null ;
+            Scanner scan = null;
             try {
-                scan = new Scanner(new FileInputStream(file)) ;
-                while(scan.hasNext()) {
-                    DATA=DATA+scan.next();
+                scan = new Scanner(new FileInputStream(file));
+                while (scan.hasNext()) {
+                    DATA = DATA + scan.next();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -78,10 +94,11 @@ public class ToolBox {
         }
         return DATA;
     }
+
     //通过蓝牙发送信息
-    public void sendMessage(String str,Context context,OutputStream btOutputStream){
-        String testString=str;
-        byte [] b = null;
+    public void sendMessage(String str, Context context, OutputStream btOutputStream) {
+        String testString = str;
+        byte[] b = null;
         try {
             b = testString.getBytes("GBK");
             btOutputStream.write(b);

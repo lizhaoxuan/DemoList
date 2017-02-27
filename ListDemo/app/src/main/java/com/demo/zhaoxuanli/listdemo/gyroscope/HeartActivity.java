@@ -16,12 +16,14 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.apt.CakeRouterUrl;
 import com.demo.zhaoxuanli.listdemo.R;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 
+@CakeRouterUrl("HeartActivity")
 public class HeartActivity extends AppCompatActivity {
 
     private MyView mAnimView = null;
