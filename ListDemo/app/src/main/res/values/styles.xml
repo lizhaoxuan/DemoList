@@ -1,6 +1,6 @@
 <resources>
 
-    <!-- Base application theme. -->
+    <!-- Base mApplication theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="android:listDivider">@color/black</item>
@@ -29,7 +29,7 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <!-- Base application theme. -->
+    <!-- Base mApplication theme. -->
     <style name="NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="android:windowActionBarOverlay">true</item>

@@ -26,6 +26,7 @@ import com.demo.zhaoxuanli.listdemo.music_player.MusicPlayerActivity;
 import com.demo.zhaoxuanli.listdemo.quietly_weak.QuietlyWeakActivity;
 import com.demo.zhaoxuanli.listdemo.reflection.ReflectionActivity;
 import com.demo.zhaoxuanli.listdemo.router.RouterActivity;
+import com.demo.zhaoxuanli.listdemo.settings.GetSettingsActivity;
 import com.demo.zhaoxuanli.listdemo.teach_case.TeachCaseActivity;
 import com.demo.zhaoxuanli.listdemo.test.MergeRequestActivity;
 import com.demo.zhaoxuanli.listdemo.thread_pool.ThreadPoolActivity;
@@ -48,7 +49,6 @@ public class RecycleViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycle_view);
-
         initData();
         initView();
 
@@ -102,6 +102,8 @@ public class RecycleViewActivity extends AppCompatActivity {
     private void initData() {
 
         myDatas = new ArrayList<>();
+        myDatas.add(new ItemValue(0, "GetSettings",
+                "获取手机的设备信息与设置信息", GetSettingsActivity.class));
         myDatas.add(new ItemValue(0, "Router",
                 "通过Url启动activity", RouterActivity.class));
         myDatas.add(new ItemValue(0, "mergeRequst",

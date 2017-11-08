@@ -45,15 +45,15 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * <p>This class can be used to enable the use of HierarchyViewer inside an
- * application. HierarchyViewer is an Android SDK tool that can be used
+ * mApplication. HierarchyViewer is an Android SDK tool that can be used
  * to inspect and debug the user interface of running applications. For
  * security reasons, HierarchyViewer does not work on production builds
  * (for instance phones bought in store.) By using this class, you can
  * make HierarchyViewer work on any device. You must be very careful
  * however to only enable HierarchyViewer when debugging your
- * application.</p>
+ * mApplication.</p>
  * <p/>
- * <p>To use this view server, your application must require the INTERNET
+ * <p>To use this view server, your mApplication must require the INTERNET
  * permission.</p>
  * <p/>
  * <p>The recommended way to use this API is to register activities when
@@ -151,16 +151,16 @@ public class ViewServer implements Runnable {
 
     /**
      * Returns a unique instance of the ViewServer. This method should only be
-     * called from the main thread of your application. The server will have
+     * called from the main thread of your mApplication. The server will have
      * the same lifetime as your process.
      * <p/>
-     * If your application does not have the <code>android:debuggable</code>
+     * If your mApplication does not have the <code>android:debuggable</code>
      * flag set in its manifest, the server returned by this method will
      * be a dummy object that does not do anything. This allows you to use
-     * the same code in debug and release versions of your application.
+     * the same code in debug and release versions of your mApplication.
      *
-     * @param context A Context used to check whether the application is
-     *                debuggable, this can be the application context
+     * @param context A Context used to check whether the mApplication is
+     *                debuggable, this can be the mApplication context
      */
     public static ViewServer get(Context context) {
         ApplicationInfo info = context.getApplicationInfo();
